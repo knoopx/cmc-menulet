@@ -25,7 +25,7 @@
     "@vx/scale": "^0.0.140",
     "@vx/shape": "^0.0.140",
     "babel-core": "^6.26.0",
-    "babel-eslint": "^8.0.0",
+    "babel-eslint": "^8.0.1",
     "babel-loader": "^7.1.2",
     "babel-plugin-autobind-class-methods": "^5.0.1",
     "babel-plugin-closure-elimination": "^1.2.1",
@@ -74,6 +74,6 @@
     "style-loader": "^0.18.2",
     "tachyons-open-color": "knoopx/tachyons-open-color",
     "webpack": "^3.6.0",
-    "webpack-dev-server": "^2.8.2"
+    "webpack-dev-server": "^2.9.1"
   }
 }
