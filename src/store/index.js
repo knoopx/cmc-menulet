@@ -6,7 +6,9 @@ import { now } from 'mobx-utils'
 import { ipcRenderer } from 'electron'
 
 import Ticker from './ticker'
+
 import baseCurrencies from '../data/base-currencies'
+import periods from '../data/periods'
 
 // https://www.cryptocompare.com/api/data/coinsnapshot/?fsym=ETH&tsym=BTC
 // http://coinmarketcap.io/apiUpdateCoinDb.php?callback=jQuery321010028499331151552_1504190298069&updatecoindb=yes&_=1504190298070
@@ -41,6 +43,7 @@ export default types.model('Store', {
   refreshInterval: types.optional(types.number, 30000),
   isFetching: types.optional(types.boolean, false),
   showOnlyHolding: types.optional(types.boolean, false),
+  period: types.optional(types.enumeration(periods), '1W'),
 })
   .views(self => ({
     get matchingHoldingsTickers() {
@@ -78,58 +81,67 @@ export default types.model('Store', {
       return self.nextUpdateAt - now()
     },
   }))
-  .actions(self => ({
-    afterCreate() {
-      autorun(self.fetchTickers)
-      autorun(() => {
-        if (self.remainingTime === 0) {
-          untracked(() => { self.fetchTickers() })
+  .actions((self) => {
+    const disposables = []
+    return {
+      afterCreate() {
+        disposables.push(autorun(self.fetchTickers))
+        disposables.push(autorun(() => {
+          if (self.remainingTime === 0) {
+            untracked(() => { self.fetchTickers() })
+          }
+        }))
+        disposables.push(autorun(() => { ipcRenderer.send('set-title', `${numeral(self.portfoioValue).format('0,0.00')} ${self.baseCurrency}`) }))
+      },
+      beforeDestroy() {
+        disposables.forEach((dispose) => { dispose() })
+      },
+      async fetchTickers() {
+        self.setIsFetching(true)
+        try {
+          const url = new URL('https://api.coinmarketcap.com/v1/ticker/')
+          url.searchParams.append('convert', self.baseCurrency)
+          // url.searchParams.append('limit', self.tickerLimit)
+          url.searchParams.append('fresh', Date.now())
+          const response = await fetch(url)
+          self.setTickers(await response.json())
+        } finally {
+          self.setIsFetching(false)
+          self.touch()
         }
-      })
-      autorun(() => { ipcRenderer.send('set-title', `${numeral(self.portfoioValue).format('0,0.00')} ${self.baseCurrency}`) })
-    },
-    async fetchTickers() {
-      self.setIsFetching(true)
-      try {
-        const url = new URL('https://api.coinmarketcap.com/v1/ticker/')
-        url.searchParams.append('convert', self.baseCurrency)
-        // url.searchParams.append('limit', self.tickerLimit)
-        url.searchParams.append('fresh', Date.now())
-        const response = await fetch(url)
-        self.setTickers(await response.json())
-      } finally {
-        self.setIsFetching(false)
-        self.touch()
-      }
-    },
-    touch() {
-      self.lastUpdate = Date.now()
-    },
-    toggleOnlyHolding() {
-      self.showOnlyHolding = !self.showOnlyHolding
-    },
-    setIsFetching(value) {
-      self.isFetching = value
-    },
-    setTickers(tickers) {
-      tickers.map(self.mergeTicker)
-    },
-    setBaseCurrency(value) {
-      self.baseCurrency = value
-    },
-    mergeTicker({ id, ...props }) {
-      const data = parseTicker({ id, ...props })
-      const ticker = self.tickers.get(id)
-      if (ticker) {
-        Object.assign(ticker, data)
-      } else {
-        self.tickers.set(id, data)
-      }
-    },
-    setQuery(e) {
-      self.query = e.target.value
-    },
-    setHoldings(ticker, amount) {
-      self.holdings.set(ticker.id, { amount })
-    },
-  }))
+      },
+      touch() {
+        self.lastUpdate = Date.now()
+      },
+      toggleOnlyHolding() {
+        self.showOnlyHolding = !self.showOnlyHolding
+      },
+      setIsFetching(value) {
+        self.isFetching = value
+      },
+      setTickers(tickers) {
+        tickers.map(self.mergeTicker)
+      },
+      setBaseCurrency(value) {
+        self.baseCurrency = value
+      },
+      mergeTicker({ id, ...props }) {
+        const data = parseTicker({ id, ...props })
+        const ticker = self.tickers.get(id)
+        if (ticker) {
+          Object.assign(ticker, data)
+        } else {
+          self.tickers.set(id, data)
+        }
+      },
+      setQuery(e) {
+        self.query = e.target.value
+      },
+      setHoldings(ticker, amount) {
+        self.holdings.set(ticker.id, { amount })
+      },
+      setPeriod(value) {
+        self.period = value
+      },
+    }
+  })

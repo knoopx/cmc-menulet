@@ -7,7 +7,7 @@ import Input from './input'
 import Ticker from './ticker'
 import Counter from './counter'
 import Spinner from './spinner'
-import Fader from './fader'
+import PeriodSwitcher from './period-switcher'
 
 import PrettyPrice from './pretty-price'
 import PrettyPercent from './pretty-percent'
@@ -66,7 +66,8 @@ export default class App extends React.Component {
           </div>
         </div>
         <div className="flex flex-none ph3 pv2 bb b--black-10">
-          <Input className="bn" type="search" value={store.query} onChange={store.setQuery} />
+          <Input className="bn" type="search" value={store.query} placeholder="Filter..." onChange={store.setQuery} />
+          <PeriodSwitcher />
         </div>
         <VirtualList items={store.matchingTickers} itemHeight={72} renderItem={this.renderItem} />
       </div>
