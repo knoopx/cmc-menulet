@@ -1,14 +1,16 @@
 {
   "presets": ["react"],
   "plugins": [
-    "closure-elimination",
     "transform-export-extensions",
     "transform-decorators-legacy",
     "autobind-class-methods",
     "transform-class-properties",
     "syntax-trailing-function-commas",
     "transform-object-rest-spread",
-    ["transform-es2015-classes", { "loose": true }]
+    ["transform-es2015-classes", { "loose": true }],
+    "transform-react-inline-elements",
+    "transform-react-constant-elements",
+    "closure-elimination",
   ],
   "env": {
     "development": {
@@ -17,9 +19,7 @@
       ]
     },
     "production": {
-      "presets": [
-        "react-optimize"
-      ]
+      "plugins": ["transform-react-remove-prop-types"]
     }
   }
 }
