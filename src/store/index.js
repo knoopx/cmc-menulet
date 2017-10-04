@@ -123,7 +123,7 @@ export default types.model('Store', {
       if (ticker) {
         Object.assign(ticker, data)
       } else {
-        self.tickers.put(data)
+        self.tickers.set(id, data)
       }
     },
     setQuery(e) {

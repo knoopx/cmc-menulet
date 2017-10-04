@@ -32,7 +32,7 @@ export default types.model('History', {
     return {
       afterCreate() {
         dispose = autorun(() => {
-          if (getParent(self).isVisible) {
+          if (getParent(self).isVisible && (self.data.length === 0 || getParent(self, 3).remainingTime === 0)) {
             untracked(() => !self.isFetching && self.fetch())
           }
         })
