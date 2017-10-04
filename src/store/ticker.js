@@ -1,5 +1,7 @@
 import { types, getParent } from 'mobx-state-tree'
+
 import baseCurrencies from '../data/base-currencies'
+import History from './history'
 
 const propTypes = baseCurrencies.map(x => x.toLocaleLowerCase()).reduce((props, c) => ({
   ...props,
@@ -8,16 +10,8 @@ const propTypes = baseCurrencies.map(x => x.toLocaleLowerCase()).reduce((props, 
   [`market_cap_${c}`]: types.maybe(types.number),
 }), {})
 
-const HistoryPoint = types.model('HistoryPoint', {
-  time: types.number,
-  close: types.number,
-  volumefrom: types.number,
-})
-
 export default types.model('Ticker', {
-  isVisible: types.optional(types.boolean, false),
-
-  id: types.identifier(),
+  id: types.identifier(types.string),
   name: types.string,
   symbol: types.string,
   rank: types.number,
@@ -31,24 +25,11 @@ export default types.model('Ticker', {
   percent_change_7d: types.maybe(types.number),
   ...propTypes,
   holdings: types.optional(types.number, 0.0),
+  history: types.optional(History, {}),
 
-  wasHistoryFetched: types.optional(types.boolean, false),
-  history: types.optional(types.array(HistoryPoint), []),
+  isVisible: types.optional(types.boolean, false),
 })
-  .preProcessSnapshot(({ rank, last_updated, available_supply, total_supply, percent_change_1h, percent_change_24h, percent_change_7d, ...props }) => ({
-    ...props,
-    rank: parseInt(rank),
-    last_updated: parseInt(last_updated),
-    available_supply: parseFloat(available_supply),
-    total_supply: parseFloat(total_supply),
-    percent_change_1h: parseFloat(percent_change_1h),
-    percent_change_24h: parseFloat(percent_change_24h),
-    percent_change_7d: parseFloat(percent_change_7d),
-    ...Object.keys(propTypes).reduce((result, propName) => ({
-      ...result,
-      [propName]: parseFloat(props[propName]),
-    }), {}),
-  }))
+  .preProcessSnapshot(props => ({ ...props, isVisible: false }))
   .views(self => ({
     get fuzzy() {
       return [self.name, self.symbol].join(' ')
@@ -64,19 +45,7 @@ export default types.model('Ticker', {
     setHoldings(amount) {
       self.holdings = amount
     },
-    setHistory(data) {
-      self.wasHistoryFetched = true
-      self.history.replace(data)
-    },
-    async fetchHistory() {
-      const url = new URL('https://min-api.cryptocompare.com/data/histohour')
-      url.searchParams.append('fsym', self.symbol)
-      url.searchParams.append('tsym', self.baseCurrency)
-      url.searchParams.append('limit', 168)
-      url.searchParams.append('aggregate', 1)
-
-      const response = await fetch(url)
-      const json = await response.json()
-      self.setHistory(json.Data)
+    setIsVisible(value) {
+      self.isVisible = value
     },
   }))
