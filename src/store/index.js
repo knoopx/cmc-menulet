@@ -1,7 +1,6 @@
 import numeral from 'numeral'
 import { sum, sortBy } from 'lodash'
 import { types, getSnapshot } from 'mobx-state-tree'
-import { filter } from 'fuzzaldrin'
 import { autorun } from 'mobx'
 import { ipcRenderer } from 'electron'
 
@@ -44,13 +43,14 @@ export default types.model('Store', {
 })
   .views(self => ({
     get matchingHoldingsTickers() {
+      const tickers = self.tickers.values()
       if (self.showOnlyHolding) {
-        return self.tickers.values().filter(({ holdings }) => holdings > 0)
+        return tickers.filter(({ holdings }) => holdings > 0)
       }
-      return self.tickers.values()
+      return tickers
     },
     get matchingTickers() {
-      return sortBy(filter(self.matchingHoldingsTickers, self.query, { key: 'fuzzy' }), 'rank')
+      return sortBy(self.matchingHoldingsTickers.filter(t => t.matches(self.query)), 'rank')
     },
     get portfoioValue() {
       return sum(self.tickers.values().map(c => c.holdings * c.price))

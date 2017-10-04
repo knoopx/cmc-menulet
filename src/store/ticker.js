@@ -31,14 +31,14 @@ export default types.model('Ticker', {
 })
   .preProcessSnapshot(props => ({ ...props, isVisible: false }))
   .views(self => ({
-    get fuzzy() {
-      return [self.name, self.symbol].join(' ')
-    },
     get price() {
       return self[`price_${self.baseCurrency.toLocaleLowerCase()}`]
     },
     get baseCurrency() {
       return getParent(self, 2).baseCurrency
+    },
+    matches(query) {
+      return [self.name, self.symbol].map(x => x.toLocaleLowerCase()).some(x => x.indexOf(query.toLocaleLowerCase()) >= 0)
     },
   }))
   .actions(self => ({
