@@ -69,7 +69,6 @@
     "open-color": "^1.5.1",
     "prop-types": "^15.6.0",
     "react": "^16.0",
-    "react-activity": "^1.1.2",
     "react-dom": "^16.0",
     "react-hot-loader": "^3.0.0-beta.7",
     "react-icons": "^2.2.5",

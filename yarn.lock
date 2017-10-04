@@ -4462,7 +4462,7 @@ prop-types@15.5.8:
   dependencies:
     fbjs "^0.8.9"
 
-prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.5.8:
+prop-types@^15.5.10, prop-types@^15.5.4:
   version "15.5.10"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.5.10.tgz#2797dfc3126182e3a95e3dfbb2e893ddd7456154"
   dependencies:
@@ -4580,12 +4580,6 @@ rc@^1.1.2, rc@^1.1.7:
 rcedit@^0.9.0:
   version "0.9.0"
   resolved "https://registry.yarnpkg.com/rcedit/-/rcedit-0.9.0.tgz#3910df57345399e2b0325f4a519007f89e55ef1c"
-
-react-activity@^1.1.2:
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/react-activity/-/react-activity-1.1.2.tgz#e0e32c6334ea9fac1674274476df29bd92780603"
-  dependencies:
-    prop-types "^15.5.8"
 
 react-deep-force-update@^2.0.1:
   version "2.1.1"

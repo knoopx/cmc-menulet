@@ -1,10 +1,10 @@
 import React from 'react'
 import { observer } from 'mobx-react'
-import { Squares } from 'react-activity'
 import { withParentSize } from '@vx/responsive'
 import MdWarning from 'react-icons/lib/md/warning'
 import MdCloudOff from 'react-icons/lib/md/cloud-off'
 
+import Spinner from './spinner'
 import Sparkline from './sparkline'
 
 @observer
@@ -16,7 +16,7 @@ class TickerSparkline extends React.Component {
     if (history.isFetching) {
       return (
         <div className="flex flex-auto items-center justify-center">
-          <Squares size={12} />
+          <Spinner size={24} />
         </div>
       )
     }

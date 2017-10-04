@@ -1,11 +1,13 @@
 import React from 'react'
 import classNames from 'classnames'
 import { observer, inject } from 'mobx-react'
-import { Squares } from 'react-activity'
+import { gray } from 'open-color'
 
 import Input from './input'
 import Ticker from './ticker'
 import Counter from './counter'
+import Spinner from './spinner'
+
 import PrettyPrice from './pretty-price'
 import PrettyPercent from './pretty-percent'
 import VirtualList from './virtual-list'
@@ -30,7 +32,7 @@ export default class App extends React.Component {
         <div className="flex flex-none ph3 pv2 bb b--black-10">
           <div className="flex flex-auto items-center">
             {store.isFetching ?
-              <Squares size={12} /> :
+              <Spinner size={24} color={gray[6]} /> :
               <Counter size={24} percent={store.remainingTime / store.refreshInterval} />
             }
           </div>

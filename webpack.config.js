@@ -10,7 +10,6 @@ module.exports = {
   devtool: process.env.NODE_ENV === 'production' ? 'source-map' : 'eval',
   entry: [
     'source-map-support/register',
-    'react-activity/dist/react-activity.css',
     'tachyons/css/tachyons.css',
     'tachyons-open-color',
     'cryptocoins-icons/webfont/cryptocoins.css',
