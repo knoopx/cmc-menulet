@@ -1,7 +1,8 @@
 import numeral from 'numeral'
 import { sum, sortBy } from 'lodash'
 import { types, getSnapshot } from 'mobx-state-tree'
-import { autorun } from 'mobx'
+import { autorun, untracked } from 'mobx'
+import { now } from 'mobx-utils'
 import { ipcRenderer } from 'electron'
 
 import Ticker from './ticker'
@@ -67,11 +68,24 @@ export default types.model('Store', {
       const x = self.tickers.values().filter(c => c.percent_change_7d)
       return sum(x.map(c => c.percent_change_7d)) / x.length
     },
+    get nextUpdateAt() {
+      return self.lastUpdate + self.refreshInterval
+    },
+    get remainingTime() {
+      if (self.nextUpdateAt < now()) {
+        return 0
+      }
+      return self.nextUpdateAt - now()
+    },
   }))
   .actions(self => ({
     afterCreate() {
-      self.next()
       autorun(self.fetchTickers)
+      autorun(() => {
+        if (self.remainingTime === 0) {
+          untracked(() => { self.fetchTickers() })
+        }
+      })
       autorun(() => { ipcRenderer.send('set-title', `${numeral(self.portfoioValue).format('0,0.00')} ${self.baseCurrency}`) })
     },
     async fetchTickers() {
@@ -87,12 +101,6 @@ export default types.model('Store', {
         self.setIsFetching(false)
         self.touch()
       }
-    },
-    next() {
-      setTimeout(async () => {
-        await self.fetchTickers()
-        self.next()
-      }, self.refreshInterval)
     },
     touch() {
       self.lastUpdate = Date.now()

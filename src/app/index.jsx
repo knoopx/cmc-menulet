@@ -31,7 +31,7 @@ export default class App extends React.Component {
           <div className="flex flex-auto items-center">
             {store.isFetching ?
               <Squares size={12} /> :
-              <Counter size={24} startedAt={store.lastUpdate} duration={store.refreshInterval} />
+              <Counter size={24} percent={store.remainingTime / store.refreshInterval} />
             }
           </div>
           <div className="flex flex-auto flex-column items-center justify-center">
