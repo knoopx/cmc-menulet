@@ -29,7 +29,7 @@ app.on('ready', () => {
   if (process.env.NODE_ENV === 'development') {
     index = 'http://localhost:8080/renderer.html'
   }
-  const mb = menubar({ index, width: 600, height: height * 0.75, preloadWindow: true, webPreferences: { webSecurity: false } })
+  const mb = menubar({ index, width: 720, height: height * 0.75, preloadWindow: true, webPreferences: { webSecurity: false } })
   mb.on('ready', () => {
     if (process.env.DEBUG || process.env.NODE_ENV === 'development') {
       mb.window.webContents.openDevTools()

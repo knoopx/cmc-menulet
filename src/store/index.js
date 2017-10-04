@@ -47,28 +47,30 @@ export default types.model('Store', {
 })
   .views(self => ({
     get matchingHoldingsTickers() {
-      const tickers = self.tickers.values()
       if (self.showOnlyHolding) {
-        return tickers.filter(({ holdings }) => holdings > 0)
+        return self.holdingTickers
       }
-      return tickers
+      return self.tickers.values()
+    },
+    get holdingTickers() {
+      return self.tickers.values().filter(({ holdings }) => holdings > 0)
     },
     get matchingTickers() {
       return sortBy(self.matchingHoldingsTickers.filter(t => t.matches(self.query)), 'rank')
     },
-    get portfoioValue() {
-      return sum(self.tickers.values().map(c => c.holdings * c.price))
+    get portfolioValue() {
+      return sum(self.holdingTickers.map(c => c.holdings * c.price))
     },
-    get portfoioChange1h() {
-      const x = self.tickers.values().filter(c => c.percent_change_1h)
+    get portfolioChange1h() {
+      const x = self.holdingTickers.filter(c => c.percent_change_1h)
       return sum(x.map(c => c.percent_change_1h)) / x.length
     },
-    get portfoioChange1d() {
-      const x = self.tickers.values().filter(c => c.percent_change_24h)
+    get portfolioChange1d() {
+      const x = self.holdingTickers.filter(c => c.percent_change_24h)
       return sum(x.map(c => c.percent_change_24h)) / x.length
     },
-    get portfoioChange7d() {
-      const x = self.tickers.values().filter(c => c.percent_change_7d)
+    get portfolioChange7d() {
+      const x = self.holdingTickers.filter(c => c.percent_change_7d)
       return sum(x.map(c => c.percent_change_7d)) / x.length
     },
     get nextUpdateAt() {
@@ -91,7 +93,7 @@ export default types.model('Store', {
             untracked(() => { self.fetchTickers() })
           }
         }))
-        disposables.push(autorun(() => { ipcRenderer.send('set-title', `${numeral(self.portfoioValue).format('0,0.00')} ${self.baseCurrency}`) }))
+        disposables.push(autorun(() => { ipcRenderer.send('set-title', `${numeral(self.portfolioValue).format('0,0.00')} ${self.baseCurrency}`) }))
       },
       beforeDestroy() {
         disposables.forEach((dispose) => { dispose() })

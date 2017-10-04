@@ -7,7 +7,7 @@ const MAPPING = {
   MIOTA: 'IOT',
 }
 
-function aggregate(history, max = 75) {
+function aggregate(history, max = 100) {
   let i = 0
   let x = 0
   const bucketLength = Math.ceil(history.length / max)

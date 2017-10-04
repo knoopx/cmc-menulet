@@ -12,7 +12,7 @@ import Fader from './fader'
 @observer
 class TickerSparkline extends React.Component {
   render() {
-    const { ticker, parentWidth } = this.props
+    const { ticker, height, parentWidth } = this.props
     const { id, name, symbol, holdings, setHoldings, price, baseCurrency, percent_change_1h, percent_change_24h, percent_change_7d, history } = ticker
 
     if (history.isFetching) {
@@ -26,7 +26,7 @@ class TickerSparkline extends React.Component {
     return (
       <div className="relative">
         <Fader>
-          <Sparkline width={parentWidth} data={history.data} />
+          <Sparkline width={parentWidth} data={history.data} height={height} />
           {history.hasError && (
             <div className="absolute absolute--fill flex flex-auto items-center justify-center">
               <MdWarning className="gray-6" size={24} />
