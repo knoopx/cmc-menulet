@@ -14,6 +14,7 @@ module.exports = {
     'tachyons/css/tachyons.css',
     'tachyons-open-color',
     'cryptocoins-icons/webfont/cryptocoins.css',
+    './src/index.css',
     './src/index.jsx',
   ],
   plugins: [
