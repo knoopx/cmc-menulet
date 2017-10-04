@@ -7,6 +7,7 @@ import Input from './input'
 import Ticker from './ticker'
 import Counter from './counter'
 import Spinner from './spinner'
+import Fader from './fader'
 
 import PrettyPrice from './pretty-price'
 import PrettyPercent from './pretty-percent'

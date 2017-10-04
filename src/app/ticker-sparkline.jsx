@@ -6,6 +6,7 @@ import MdCloudOff from 'react-icons/lib/md/cloud-off'
 
 import Spinner from './spinner'
 import Sparkline from './sparkline'
+import Fader from './fader'
 
 @observer
 class TickerSparkline extends React.Component {
@@ -37,7 +38,11 @@ class TickerSparkline extends React.Component {
       )
     }
 
-    return <Sparkline width={parentWidth} data={history.data} />
+    return (
+      <Fader>
+        <Sparkline width={parentWidth} data={history.data} />
+      </Fader>
+    )
   }
 }
 
