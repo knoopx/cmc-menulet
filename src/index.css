@@ -1,3 +1,10 @@
+* {
+  user-select: none;
+}
+
+::-webkit-input-placeholder {
+  color: #495057;
+}
 ::-webkit-scrollbar {
   width: 16px;
 }
