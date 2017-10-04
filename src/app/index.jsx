@@ -50,7 +50,7 @@ export default class App extends React.Component {
             </select>
           </div>
           <div className="flex flex-auto items-center justify-end" >
-            <div className="flex flex-column items-end pr3" style={{ fontSize: 11 }}>
+            <div className="flex flex-column items-end" style={{ fontSize: 11 }}>
               <div><PrettyPercent value={store.portfolioChange1h} /> 1H</div>
               <div><PrettyPercent value={store.portfolioChange1d} /> 1D</div>
               <div><PrettyPercent value={store.portfolioChange7d} /> 7D</div>

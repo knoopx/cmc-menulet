@@ -81,7 +81,7 @@ class Container extends React.Component {
       <div
         ref="container"
         onScroll={this.onScroll}
-        style={{ flex: 1, flexDirection: 'column', maxWidth: '100%', overflowY: 'auto' }}
+        style={{ flex: 1, flexDirection: 'column', maxWidth: '100%', overflowY: 'overlay' }}
       >
         <div style={{
           display: 'flex',
