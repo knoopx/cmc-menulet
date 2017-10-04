@@ -1,4 +1,5 @@
 import React from 'react'
+import { gray } from 'open-color'
 import { observer } from 'mobx-react'
 import { withParentSize } from '@vx/responsive'
 import MdWarning from 'react-icons/lib/md/warning'
@@ -17,31 +18,28 @@ class TickerSparkline extends React.Component {
     if (history.isFetching) {
       return (
         <div className="flex flex-auto items-center justify-center">
-          <Spinner size={24} />
-        </div>
-      )
-    }
-
-    if (history.hasError) {
-      return (
-        <div className="flex flex-auto items-center justify-center">
-          <MdWarning className="gray-6" size={24} />
-        </div>
-      )
-    }
-
-    if (history.data.length === 0) {
-      return (
-        <div className="flex flex-auto items-center justify-center">
-          <MdCloudOff className="gray-6" size={24} />
+          <Spinner size={24} color={gray[6]} />
         </div>
       )
     }
 
     return (
-      <Fader>
-        <Sparkline width={parentWidth} data={history.data} />
-      </Fader>
+      <div className="relative">
+        <Fader>
+          <Sparkline width={parentWidth} data={history.data} />
+          {history.hasError && (
+            <div className="absolute absolute--fill flex flex-auto items-center justify-center">
+              <MdWarning className="gray-6" size={24} />
+            </div>
+          )}
+
+          {!history.hasError && history.data.length === 0 && (
+            <div className="absolute absolute--fill flex flex-auto items-center justify-center">
+              <MdCloudOff className="gray-6" size={24} />
+            </div>
+          )}
+        </Fader>
+      </div>
     )
   }
 }
