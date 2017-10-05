@@ -15,32 +15,42 @@ class TickerSparkline extends React.Component {
     const { ticker, height, parentWidth } = this.props
     const { id, name, symbol, holdings, setHoldings, price, baseCurrency, percent_change_1h, percent_change_24h, percent_change_7d, history } = ticker
 
-    if (history.isFetching) {
-      return (
-        <div className="flex flex-auto items-center justify-center">
-          <Spinner size={24} color={gray[6]} />
-        </div>
-      )
-    }
+    const status = this.renderStatus()
 
     return (
       <div className="relative">
-        <Fader>
-          <Sparkline width={parentWidth} data={history.data} height={height} />
-          {history.hasError && (
-            <div className="absolute absolute--fill flex flex-auto items-center justify-center">
-              <MdWarning className="gray-6" size={24} />
-            </div>
-          )}
-
-          {!history.hasError && history.data.length === 0 && (
-            <div className="absolute absolute--fill flex flex-auto items-center justify-center">
-              <MdCloudOff className="gray-6" size={24} />
-            </div>
-          )}
-        </Fader>
+        {history.data.length > 0 && <Fader><Sparkline width={parentWidth} data={history.data} height={height} /></Fader>}
+        {status && (
+          <div className="absolute absolute--fill flex flex-auto items-center justify-center">
+            {status}
+          </div>
+        )}
       </div>
     )
+  }
+
+  renderStatus() {
+    const { history } = this.props.ticker
+
+    if (history.isFetching) {
+      return (
+        <Spinner size={24} color={gray[6]} />
+      )
+    }
+
+    if (history.hasError) {
+      return (
+        <MdWarning className="gray-6" size={24} />
+      )
+    }
+
+    if (history.data.length === 0) {
+      return (
+        <MdCloudOff className="gray-6" size={24} />
+      )
+    }
+
+    return null
   }
 }
 
