@@ -1,9 +1,9 @@
 import numeral from 'numeral'
 import { sum, sortBy } from 'lodash'
-import { types, getSnapshot } from 'mobx-state-tree'
-import { autorun, untracked } from 'mobx'
+import { types } from 'mobx-state-tree'
+import { autorun, observe, untracked } from 'mobx'
 import { now } from 'mobx-utils'
-import { ipcRenderer } from 'electron'
+import { ipcRenderer, nativeImage } from 'electron'
 
 import Ticker from './ticker'
 
@@ -87,13 +87,37 @@ export default types.model('Store', {
     const disposables = []
     return {
       afterCreate() {
+        self.setIcon('▲', 'green')
         disposables.push(autorun(self.fetchTickers))
         disposables.push(autorun(() => {
           if (self.remainingTime === 0) {
             untracked(() => { self.fetchTickers() })
           }
         }))
-        disposables.push(autorun(() => { ipcRenderer.send('set-title', `${numeral(self.portfolioValue).format('0,0.00')} ${self.baseCurrency}`) }))
+        disposables.push(observe(self, 'portfolioValue', ({ oldValue, newValue }) => {
+          ipcRenderer.send('set-title', `${numeral(newValue).format('0,0.00')} ${self.baseCurrency}`)
+
+          if (newValue > oldValue) {
+            self.setIcon('▲', 'green')
+          } else if (newValue < oldValue) {
+            self.setIcon('▼', 'red')
+          } else {
+            self.setIcon('▶', 'black')
+          }
+        }))
+      },
+      setIcon(char, color) {
+        const size = 22
+        const fontSize = 18
+        const canvas = document.createElement('canvas')
+        const context = canvas.getContext('2d')
+        canvas.height = size
+        canvas.width = size
+        context.fillStyle = color
+        context.font = `${fontSize}px Arial`
+        const { width } = context.measureText(char)
+        context.fillText(char, (size / 2) - (width / 2), fontSize)
+        ipcRenderer.send('set-icon', canvas.toDataURL())
       },
       beforeDestroy() {
         disposables.forEach((dispose) => { dispose() })
