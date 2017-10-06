@@ -11,7 +11,6 @@ const Arc = ({ size, percent, strokeWidth, style }) => {
       r={radius}
       cx="50%"
       cy="50%"
-      size={size}
       strokeWidth={strokeWidth}
       style={{
         ...style,

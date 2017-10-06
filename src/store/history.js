@@ -148,7 +148,7 @@ export default types.model('History', {
         ))
       },
       beforeDestroy() {
-        disposables.foreach(dispose => dispose())
+        disposables.forEach(dispose => dispose())
       },
       setData(data) {
         self.data.replace(data)
