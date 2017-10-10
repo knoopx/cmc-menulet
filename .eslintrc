@@ -1,6 +1,6 @@
 {
   "parser": "babel-eslint",
-  "extends": "airbnb",
+  "extends": ["airbnb-base", "airbnb-base/rules/strict", "airbnb/rules/react"],
   "env": {
     "browser": true,
     "node": true
@@ -13,6 +13,7 @@
     "react/prefer-stateless-function": "off",
     "react/sort-comp": "off",
     "import/no-extraneous-dependencies": "off",
+    "import/extensions": ["warn", { "json": "never" }],
     "semi": ["warn", "never"]
   },
   "plugins": ["import", "react"],
