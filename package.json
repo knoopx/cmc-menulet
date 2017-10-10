@@ -18,8 +18,7 @@
   },
   "dependencies": {
     "electron-default-menu": "^1.0.1",
-    "menubar": "^5.2.3",
-    "tachyons": "^4.8.1"
+    "menubar": "^5.2.3"
   },
   "devDependencies": {
     "@vx/group": "^0.0.140",
@@ -76,6 +75,7 @@
     "react-icons": "^2.2.7",
     "react-motion": "^0.5.2",
     "style-loader": "^0.19.0",
+    "tachyons": "^4.8.1",
     "tachyons-open-color": "knoopx/tachyons-open-color",
     "webpack": "^3.6.0",
     "webpack-dev-server": "^2.9.1"
