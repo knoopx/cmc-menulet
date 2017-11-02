@@ -1,6 +1,6 @@
 import { autorun, reaction, untracked } from 'mobx'
 import { now } from 'mobx-utils'
-import { types, getParent, process } from 'mobx-state-tree'
+import { types, getParent, flow } from 'mobx-state-tree'
 import { nest } from 'd3-collection'
 
 const MAPPING = {
@@ -159,7 +159,7 @@ export default types.model('History', {
       setHasError(value) {
         self.hasError = value
       },
-      fetch: process(function* () {
+      fetch: flow(function* () {
         if (!self.isFetching) {
           self.setIsFetching(true)
           self.setHasError(false)
