@@ -23,7 +23,7 @@ export default class Ticker extends React.Component {
       <div className="flex ph3 pv2 bb b--black-10 lh-copy items-center" style={{ height: 100 }} key={id}>
         <div className="flex items-start" style={{ width: 160 }}>
           <div className="mr3" style={{ minWidth: 24 }}>
-            <i className={classNames('f3 gray-6', `cc-${symbol}`)} />
+            <i className={classNames('f3 gray-6', `cc ${symbol}`)} />
           </div>
           <div className="flex-auto">
             <div className="b gray-3 truncate">{symbol}</div>
