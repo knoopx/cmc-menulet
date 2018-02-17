@@ -3,7 +3,6 @@ import { sum, sortBy } from 'lodash'
 import { types, flow, getSnapshot } from 'mobx-state-tree'
 import { autorun, observe, untracked } from 'mobx'
 import { now } from 'mobx-utils'
-import { ipcRenderer, nativeImage } from 'electron'
 
 import Ticker from './ticker'
 
@@ -122,10 +121,6 @@ export default types
           }
         }))
         disposables.push(observe(self, 'portfolioValue', ({ oldValue, newValue }) => {
-          ipcRenderer.send(
-            'set-title',
-            `${numeral(newValue).format('0,0.00')} ${self.baseCurrency}`,
-          )
 
           if (newValue > oldValue) {
             self.setIcon('▲', 'green')
@@ -154,7 +149,6 @@ export default types
         context.font = `${fontSize}px Arial`
         const { width } = context.measureText(char)
         context.fillText(char, size / 2 - width / 2, fontSize)
-        ipcRenderer.send('set-icon', canvas.toDataURL())
       },
       beforeDestroy() {
         disposables.forEach((dispose) => {

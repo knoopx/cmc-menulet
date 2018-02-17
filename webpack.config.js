@@ -1,32 +1,60 @@
 const path = require('path')
+const glob = require('glob')
 const webpack = require('webpack')
-const { productName, dependencies } = require('./package.json')
+const { productName, description, dependencies } = require('./package.json')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
+const PurgecssPlugin = require('purgecss-webpack-plugin')
+const WebpackPwaManifest = require('webpack-pwa-manifest')
+
+class Extractor {
+  static extract(content) {
+    return content.match(/[A-z0-9-:\/]+/g)
+  }
+}
 
 module.exports = {
-  target: 'electron-renderer',
   mode: process.env.NODE_ENV,
   entry: [
-    'source-map-support/register',
     'tachyons/css/tachyons.css',
     'tachyons-open-color',
-    'cryptocoins-icons/webfont/cryptocoins.css',
     './src/index.css',
     './src/index.jsx',
   ],
   plugins: [
     new webpack.ExternalsPlugin('commonjs', Object.keys(dependencies)),
-    new ExtractTextPlugin('renderer.css'),
+    new ExtractTextPlugin('bundle.css'),
+    new PurgecssPlugin({
+      paths: glob.sync(path.join(path.resolve(__dirname, './src'), '**/*.{js,jsx,ejs}')),
+      extractors: [
+        {
+          extractor: Extractor,
+          extensions: ['js', 'jsx', 'ejs'],
+        },
+      ],
+    }),
+    new FaviconsWebpackPlugin(path.resolve(__dirname, 'Icon.png')),
     new HtmlWebpackPlugin({
       title: productName,
-      filename: 'renderer.html',
       template: 'src/index.ejs',
+    }),
+    new WebpackPwaManifest({
+      name: productName,
+      short_name: productName,
+      description,
+      background_color: '#343a40',
+      icons: [
+        {
+          src: path.resolve(path.resolve(__dirname, 'Icon.png')),
+          sizes: [96, 128, 192, 256, 384, 512],
+        },
+      ],
     }),
   ],
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'renderer.js',
+    filename: 'bundle.js',
   },
   resolve: {
     modules: [path.resolve(__dirname, './src'), 'node_modules'],
@@ -39,6 +67,7 @@ module.exports = {
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
           use: 'css-loader',
+          disable: process.env.NODE_ENV !== 'production',
         }),
       },
       {
