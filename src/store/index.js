@@ -1,6 +1,6 @@
 import numeral from 'numeral'
 import { sum, sortBy } from 'lodash'
-import { types } from 'mobx-state-tree'
+import { types, getSnapshot } from 'mobx-state-tree'
 import { autorun, observe, untracked } from 'mobx'
 import { now } from 'mobx-utils'
 import { ipcRenderer, nativeImage } from 'electron'
@@ -14,7 +14,16 @@ import periods from '../data/periods'
 // http://coinmarketcap.io/apiUpdateCoinDb.php?callback=jQuery321010028499331151552_1504190298069&updatecoindb=yes&_=1504190298070
 // http://coinmarketcap.io/system_coin_db_v2.js
 
-function parseTicker({ rank, last_updated, available_supply, total_supply, percent_change_1h, percent_change_24h, percent_change_7d, ...props }) {
+function parseTicker({
+  rank,
+  last_updated,
+  available_supply,
+  total_supply,
+  percent_change_1h,
+  percent_change_24h,
+  percent_change_7d,
+  ...props
+}) {
   return {
     ...props,
     rank: parseInt(rank),
@@ -24,27 +33,35 @@ function parseTicker({ rank, last_updated, available_supply, total_supply, perce
     percent_change_1h: parseFloat(percent_change_1h),
     percent_change_24h: parseFloat(percent_change_24h),
     percent_change_7d: parseFloat(percent_change_7d),
-    ...baseCurrencies.map(x => x.toLocaleLowerCase()).reduce((result, c) => ({
-      ...result,
-      ...[`price_${c}`, `24h_volume_${c}`, `market_cap_${c}`].reduce((res, propName) => ({
-        ...res,
-        [propName]: props[propName] ? parseFloat(props[propName]) : null,
-      }), {}),
-    }), {}),
+    ...baseCurrencies.map(x => x.toLocaleLowerCase()).reduce(
+      (result, c) => ({
+        ...result,
+        ...[`price_${c}`, `24h_volume_${c}`, `market_cap_${c}`].reduce(
+          (res, propName) => ({
+            ...res,
+            [propName]: props[propName] ? parseFloat(props[propName]) : null,
+          }),
+          {},
+        ),
+      }),
+      {},
+    ),
   }
 }
 
-export default types.model('Store', {
-  lastUpdate: types.maybe(types.number),
-  query: types.optional(types.string, ''),
-  baseCurrency: types.optional(types.string, 'USD'),
-  tickers: types.optional(types.map(Ticker), {}),
-  // tickerLimit: types.optional(types.number, 25),
-  refreshInterval: types.optional(types.number, 30000),
-  isFetching: types.optional(types.boolean, false),
-  showOnlyHolding: types.optional(types.boolean, false),
-  period: types.optional(types.enumeration(periods), '1W'),
-})
+export default types
+  .model('Store', {
+    lastUpdate: types.maybe(types.number),
+    query: types.optional(types.string, ''),
+    baseCurrency: types.optional(types.string, 'USD'),
+    tickers: types.optional(types.map(Ticker), {}),
+    // tickerLimit: types.optional(types.number, 25),
+    refreshInterval: types.optional(types.number, 30000),
+    isFetching: types.optional(types.boolean, false),
+    showOnlyHolding: types.optional(types.boolean, false),
+    period: types.optional(types.enumeration(periods), '1W'),
+    coinMarketCapIOKey: types.optional(types.string, ''),
+  })
   .views(self => ({
     get matchingHoldingsTickers() {
       if (self.showOnlyHolding) {
@@ -56,7 +73,10 @@ export default types.model('Store', {
       return self.tickers.values().filter(({ holdings }) => holdings > 0)
     },
     get matchingTickers() {
-      return sortBy(self.matchingHoldingsTickers.filter(t => t.matches(self.query)), 'rank')
+      return sortBy(
+        self.matchingHoldingsTickers.filter(t => t.matches(self.query)),
+        'rank',
+      )
     },
     get portfolioValue() {
       return sum(self.holdingTickers.map(c => c.holdings * c.price))
@@ -90,12 +110,22 @@ export default types.model('Store', {
         self.setIcon('▲', 'green')
         disposables.push(autorun(self.fetchTickers))
         disposables.push(autorun(() => {
+          if (self.coinMarketCapIOKey.length === 64) {
+            self.fetchCoinMarketCapIOHoldings()
+          }
+        }))
+        disposables.push(autorun(() => {
           if (self.remainingTime === 0) {
-            untracked(() => { self.fetchTickers() })
+            untracked(() => {
+              self.fetchTickers()
+            })
           }
         }))
         disposables.push(observe(self, 'portfolioValue', ({ oldValue, newValue }) => {
-          ipcRenderer.send('set-title', `${numeral(newValue).format('0,0.00')} ${self.baseCurrency}`)
+          ipcRenderer.send(
+            'set-title',
+            `${numeral(newValue).format('0,0.00')} ${self.baseCurrency}`,
+          )
 
           if (newValue > oldValue) {
             self.setIcon('▲', 'green')
@@ -103,6 +133,13 @@ export default types.model('Store', {
             self.setIcon('▼', 'red')
           } else {
             self.setIcon('▶', 'black')
+          }
+        }))
+        disposables.push(autorun(() => {
+          if (self.remainingTime === 0) {
+            untracked(() => {
+              self.fetchTickers()
+            })
           }
         }))
       },
@@ -116,11 +153,13 @@ export default types.model('Store', {
         context.fillStyle = color
         context.font = `${fontSize}px Arial`
         const { width } = context.measureText(char)
-        context.fillText(char, (size / 2) - (width / 2), fontSize)
+        context.fillText(char, size / 2 - width / 2, fontSize)
         ipcRenderer.send('set-icon', canvas.toDataURL())
       },
       beforeDestroy() {
-        disposables.forEach((dispose) => { dispose() })
+        disposables.forEach((dispose) => {
+          dispose()
+        })
       },
       async fetchTickers() {
         self.setIsFetching(true)
@@ -134,6 +173,45 @@ export default types.model('Store', {
         } finally {
           self.setIsFetching(false)
           self.touch()
+        }
+      },
+      async fetchCoinMarketCapIOHoldings() {
+        const url = 'https://cmc.tools/server/api.php'
+        const form = new FormData()
+        const opts = {
+          login: 1,
+          private_key: self.coinMarketCapIOKey,
+          user: false,
+          settings: false,
+          last_page_view: false,
+          last_coin_view: false,
+          market_cap: false,
+          coin_list: false,
+          atz: false,
+          currencies: false,
+          injector: false,
+          holdings: true,
+          watchlist: false,
+        }
+
+        Object.keys(opts).forEach((key) => {
+          form.append(key, opts[key])
+        })
+
+        try {
+          const res = await fetch(url, {
+            method: 'post',
+            body: form,
+          })
+          const json = await res.json()
+          self.tickers.values().forEach((ticker) => {
+            const match = json.coin_list.find(c => c.cmc_id === ticker.id)
+            if (match) {
+              ticker.setHoldings(Number(match.amount))
+            }
+          })
+        } catch (err) {
+          self.setCoinMarketCapIOKey('')
         }
       },
       touch() {
@@ -163,11 +241,11 @@ export default types.model('Store', {
       setQuery(e) {
         self.query = e.target.value
       },
-      setHoldings(ticker, amount) {
-        self.holdings.set(ticker.id, { amount })
-      },
       setPeriod(value) {
         self.period = value
+      },
+      setCoinMarketCapIOKey(key) {
+        self.coinMarketCapIOKey = key
       },
     }
   })
