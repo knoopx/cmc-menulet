@@ -1,0 +1,41 @@
+{
+  "icons": [
+    {
+      "src": "icon_512x512.1c54af64123e5f3a0dffde2d6570999d.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "icon_384x384.314fe39bdccfaaf22dc4e501ae422281.png",
+      "sizes": "384x384",
+      "type": "image/png"
+    },
+    {
+      "src": "icon_256x256.fa4e1fc33ed22bc6bd1c63904d75dc4b.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    },
+    {
+      "src": "icon_192x192.983e39decb55ae10db5126b31c6d7130.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon_128x128.b7ee25a305e0e2bb214f406f13f368f8.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    },
+    {
+      "src": "icon_96x96.cb0bfe81eab7e22d7943aeb501490902.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    }
+  ],
+  "name": "CoinMarketCap",
+  "short_name": "cmc-menulet",
+  "orientation": "portrait",
+  "display": "standalone",
+  "start_url": ".",
+  "description": "CoinMarketCap Menulet",
+  "background_color": "#ffffff"
+}

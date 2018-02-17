@@ -45737,7 +45737,7 @@ const Counter = Object(__WEBPACK_IMPORTED_MODULE_2_mobx_react__["c" /* observer 
   }));
 });
 
-/* harmony default export */ __webpack_exports__["a"] = (Counter);
+/* unused harmony default export */ var _unused_webpack_default_export = (Counter);
 
 /***/ }),
 
@@ -45825,56 +45825,42 @@ function _render() {
   return _jsx('div', {
     className: 'sans-serif gray-5 bg-gray-8 vh-100 flex overflow-hidden flex flex-column'
   }, void 0, _jsx('div', {
-    className: 'flex flex-none ph3 pv3 bb b--black-10 items-center'
+    className: 'flex flex-none ph2 pv2 bb b--black-10 items-center'
   }, void 0, _jsx('div', {
-    className: 'flex flex-auto items-center'
-  }, void 0, store.isFetching ? _jsx(__WEBPACK_IMPORTED_MODULE_7__spinner__["a" /* default */], {
-    size: 24,
-    color: __WEBPACK_IMPORTED_MODULE_3_open_color__["gray"][6]
-  }) : _jsx(__WEBPACK_IMPORTED_MODULE_6__counter__["a" /* default */], {
-    size: 24,
-    percent: store.remainingTime / store.refreshInterval
-  })), _jsx('div', {
-    className: 'flex flex-auto flex-row items-center justify-center'
-  }, void 0, _jsx('span', {
-    className: 'f2 mr3'
-  }, void 0, _jsx(__WEBPACK_IMPORTED_MODULE_9__pretty_price__["a" /* default */], {
-    amount: store.portfolioValue
-  })), _jsx('select', {
-    className: 'input-reset outline-0 color-inherit bn bg-transparent f5 pointer mt1 p0',
-    defaultValue: store.baseCurrency,
-    onChange: e => store.setBaseCurrency(e.target.value)
-  }, void 0, __WEBPACK_IMPORTED_MODULE_12__data_base_currencies__["a" /* default */].map(_ref))), _jsx('div', {
-    className: 'flex flex-auto items-center justify-end'
+    className: 'flex items-center justify-end'
   }, void 0, _jsx('div', {
     className: 'flex flex-column items-end',
-    style: { fontSize: 11 }
+    style: { fontSize: 11, width: 70 }
   }, void 0, _jsx('div', {}, void 0, _jsx(__WEBPACK_IMPORTED_MODULE_10__pretty_percent__["a" /* default */], {
     value: store.portfolioChange1h
   }), ' 1H'), _jsx('div', {}, void 0, _jsx(__WEBPACK_IMPORTED_MODULE_10__pretty_percent__["a" /* default */], {
     value: store.portfolioChange1d
   }), ' 1D'), _jsx('div', {}, void 0, _jsx(__WEBPACK_IMPORTED_MODULE_10__pretty_percent__["a" /* default */], {
     value: store.portfolioChange7d
-  }), ' 7D')))), _jsx('div', {
-    className: 'flex flex-none ph3 pv2 bb b--black-10'
+  }), ' 7D'))), _jsx('div', {
+    className: 'flex flex-auto flex-row items-center justify-center'
+  }, void 0, _jsx('span', {
+    className: 'f3 mr3'
+  }, void 0, _jsx(__WEBPACK_IMPORTED_MODULE_9__pretty_price__["a" /* default */], {
+    amount: store.portfolioValue
+  })), _jsx('select', {
+    className: 'input-reset outline-0 color-inherit bn bg-transparent f5 pointer mt1 p0',
+    defaultValue: store.baseCurrency,
+    onChange: e => store.setBaseCurrency(e.target.value)
+  }, void 0, __WEBPACK_IMPORTED_MODULE_12__data_base_currencies__["a" /* default */].map(_ref)))), _jsx('div', {
+    className: 'flex flex-none ph2 pv2 bb b--black-10 justify-between'
   }, void 0, _jsx('div', {
     className: __WEBPACK_IMPORTED_MODULE_1_classnames___default()('pointer ba ph2 pv1 br2 b--gray-7 mr2', {
       'bg-gray-7': store.showOnlyHolding,
       'bg-transparent': !store.showOnlyHolding
     }),
     onClick: store.toggleOnlyHolding
-  }, void 0, 'HOLD'), _jsx(__WEBPACK_IMPORTED_MODULE_4__input__["a" /* default */], {
-    className: 'ba ph2 pv1 br2 b--gray-7 mr2',
-    type: 'search',
-    value: store.query,
-    placeholder: 'Filter...',
-    onChange: store.setQuery
-  }), _jsx(__WEBPACK_IMPORTED_MODULE_8__period_switcher__["a" /* default */], {})), _jsx(__WEBPACK_IMPORTED_MODULE_11__virtual_list__["a" /* default */], {
+  }, void 0, 'HOLD'), _jsx(__WEBPACK_IMPORTED_MODULE_8__period_switcher__["a" /* default */], {})), _jsx(__WEBPACK_IMPORTED_MODULE_11__virtual_list__["a" /* default */], {
     items: store.matchingTickers,
     itemHeight: 100,
     renderItem: this.renderItem
   }), _jsx('div', {
-    className: 'flex justify-center pa2'
+    className: 'flex justify-center pa2 bt b--black-10'
   }, void 0, store.coinMarketCapIOKey.length === 64 ? _jsx('div', {
     className: __WEBPACK_IMPORTED_MODULE_1_classnames___default()('pointer ba ph2 pv1 br2 b--gray-7'),
     onClick: () => {
@@ -45952,9 +45938,11 @@ var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" &
 
 
 const PeriodSwitcher = ({ store, className }) => _jsx('div', {
-  className: __WEBPACK_IMPORTED_MODULE_2_classnames___default()('flex br2 ba b--gray-7', className)
+  className: __WEBPACK_IMPORTED_MODULE_2_classnames___default()('flex br2 ba b--gray-7 f6 items-center', className)
 }, void 0, __WEBPACK_IMPORTED_MODULE_1__data_periods__["a" /* default */].map(period => _jsx('div', {
-  className: __WEBPACK_IMPORTED_MODULE_2_classnames___default()('pv1 ph2 pointer', { 'bg-gray-7': period === store.period }),
+  className: __WEBPACK_IMPORTED_MODULE_2_classnames___default()('pv1 ph2 pointer', {
+    'bg-gray-7': period === store.period
+  }),
   onClick: () => store.setPeriod(period)
 }, void 0, period)));
 
@@ -46450,59 +46438,41 @@ function _render() {
     history
   } = this.props.ticker;
   return _jsx('div', {
-    className: 'flex ph3 pv2 bb b--black-10 lh-copy items-center',
+    className: 'flex ph2 pv1 bb b--black-10 lh-copy items-center',
     style: { height: 100 }
   }, id, _jsx('div', {
-    className: 'flex items-start',
-    style: { width: 160 }
+    className: 'flex items-start'
   }, void 0, _jsx('div', {
-    className: 'mr3',
-    style: { minWidth: 24 }
-  }, void 0, _jsx('i', {
-    className: __WEBPACK_IMPORTED_MODULE_1_classnames___default()('f3 gray-6', `cc ${symbol}`)
-  })), _jsx('div', {
-    className: 'flex-auto tr'
+    className: 'flex-auto'
   }, void 0, _jsx('div', {
-    className: 'b gray-3 truncate'
+    className: 'b gray-3 tr'
   }, void 0, symbol), _jsx('div', {
-    className: 'f7 gray-6 truncate mb2'
-  }, void 0, name), _jsx('div', {
-    className: 'gray-7 f7 flex'
-  }, void 0, _jsx(__WEBPACK_IMPORTED_MODULE_4__pretty_price__["a" /* default */], {
-    className: 'flex-auto',
-    amount: amount
-  }), _jsx('span', {
-    className: 'ml1'
-  }, void 0, baseCurrency)), _jsx('div', {
-    className: 'gray-7 f7 flex'
-  }, void 0, _jsx(__WEBPACK_IMPORTED_MODULE_3__input__["a" /* default */], {
-    className: 'flex-auto bn tr',
-    value: holdings,
-    onChange: e => {
-      setHoldings(e.target.valueAsNumber);
-    }
-  }), _jsx('span', {
-    className: 'ml1'
-  }, void 0, symbol)))), _jsx('div', {
-    className: 'flex flex-auto mh3'
+    className: 'flex items-end justify-between'
+  }, void 0), _jsx('div', {
+    className: 'flex'
+  }, void 0, _jsx('div', {
+    className: 'flex-auto'
+  }, void 0), _jsx('div', {
+    className: 'flex flex-auto flex-column items-end',
+    style: { fontSize: 11, width: 70 }
+  }, void 0, _jsx('div', {
+    className: 'nowrap'
+  }, void 0, _jsx(__WEBPACK_IMPORTED_MODULE_5__pretty_percent__["a" /* default */], {
+    value: percent_change_1h
+  }), ' 1H'), _jsx('div', {
+    className: 'nowrap'
+  }, void 0, _jsx(__WEBPACK_IMPORTED_MODULE_5__pretty_percent__["a" /* default */], {
+    value: percent_change_24h
+  }), ' 1D'), _jsx('div', {
+    className: 'nowrap'
+  }, void 0, _jsx(__WEBPACK_IMPORTED_MODULE_5__pretty_percent__["a" /* default */], {
+    value: percent_change_7d
+  }), ' 7D'))))), _jsx('div', {
+    className: 'flex flex-auto ml2'
   }, void 0, _jsx(__WEBPACK_IMPORTED_MODULE_6__ticker_sparkline__["a" /* default */], {
     ticker: this.props.ticker,
     height: 80
-  })), _jsx('div', {
-    className: 'flex flex-column justify-end gray-3 tr',
-    style: { width: 160 }
-  }, void 0, _jsx('div', {}, void 0, _jsx(__WEBPACK_IMPORTED_MODULE_4__pretty_price__["a" /* default */], {
-    amount: price
-  }), ' ', baseCurrency), _jsx('div', {
-    className: 'flex flex-column items-end',
-    style: { fontSize: 11 }
-  }, void 0, _jsx('div', {}, void 0, _jsx(__WEBPACK_IMPORTED_MODULE_5__pretty_percent__["a" /* default */], {
-    value: percent_change_1h
-  }), ' 1H'), _jsx('div', {}, void 0, _jsx(__WEBPACK_IMPORTED_MODULE_5__pretty_percent__["a" /* default */], {
-    value: percent_change_24h
-  }), ' 1D'), _jsx('div', {}, void 0, _jsx(__WEBPACK_IMPORTED_MODULE_5__pretty_percent__["a" /* default */], {
-    value: percent_change_7d
-  }), ' 7D'))));
+  })));
 }
 
 let Ticker = Object(__WEBPACK_IMPORTED_MODULE_2_mobx_react__["c" /* observer */])(_class = function (_React$Component) {
