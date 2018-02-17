@@ -32,7 +32,7 @@
     }
   ],
   "name": "CoinMarketCap",
-  "short_name": "cmc-menulet",
+  "short_name": "CoinMarketCap",
   "orientation": "portrait",
   "display": "standalone",
   "start_url": ".",
