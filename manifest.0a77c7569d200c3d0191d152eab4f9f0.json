@@ -37,6 +37,5 @@
   "display": "standalone",
   "start_url": ".",
   "description": "CoinMarketCap Menulet",
-  "background_color": "#ffffff",
-  "theme_color": "#343a40"
+  "background_color": "#ffffff"
 }
