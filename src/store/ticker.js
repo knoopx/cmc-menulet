@@ -38,6 +38,9 @@ export default types
     get price() {
       return self[`price_${self.baseCurrency.toLocaleLowerCase()}`]
     },
+    get amount() {
+      return self.price * self.holdings
+    },
     get baseCurrency() {
       return getParent(self, 2).baseCurrency
     },

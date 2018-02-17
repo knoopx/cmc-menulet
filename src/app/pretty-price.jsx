@@ -20,29 +20,30 @@ const countLeadingZeroes = (numString) => {
   return numZeroes
 }
 
-const PrettyPrice = ({ amount, format }) => {
+const PrettyPrice = ({ amount, format, ...props }) => {
   const formattedSize = Numeral(amount).format(format)
 
-  if (amount === 0) return <span className="gray-7">{formattedSize}</span>
+  if (amount === 0) {
+    return (
+      <span className="gray-7" {...props}>
+        {formattedSize}
+      </span>
+    )
+  }
   // count trailing zeroes
   const numLeadingZeroes = countLeadingZeroes(formattedSize)
   const numTrailingZeroes = countTrailingZeroes(formattedSize)
   // get digit arrays before and after decimal
-  const [
-    digitsBeforeDecimal,
-    digitsAfterDecimal = [],
-  ] = formattedSize.split('.').map(str => str.split(''))
+  const [digitsBeforeDecimal, digitsAfterDecimal = []] = formattedSize
+    .split('.')
+    .map(str => str.split(''))
 
-  const leadingZeroes = digitsBeforeDecimal.splice(
-    digitsBeforeDecimal.length - numLeadingZeroes,
-  )
+  const leadingZeroes = digitsBeforeDecimal.splice(digitsBeforeDecimal.length - numLeadingZeroes)
 
-  const trailingZeroes = digitsAfterDecimal.splice(
-    digitsAfterDecimal.length - numTrailingZeroes,
-  )
+  const trailingZeroes = digitsAfterDecimal.splice(digitsAfterDecimal.length - numTrailingZeroes)
 
   return (
-    <span>
+    <span {...props}>
       <span className="gray-7">{leadingZeroes}</span>
       <span className="gray-4">{digitsBeforeDecimal}</span>
       <span className="gray-6">.{digitsAfterDecimal}</span>
