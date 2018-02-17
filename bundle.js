@@ -47100,7 +47100,6 @@ function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in ob
 
 
 
-// import { ipcRenderer, nativeImage } from 'electron'
 
 
 
@@ -47248,10 +47247,6 @@ function _ref19(dispose) {
   }
 
   function _ref16({ oldValue, newValue }) {
-    // ipcRenderer.send(
-    //   'set-title',
-    //   `${numeral(newValue).format('0,0.00')} ${self.baseCurrency}`,
-    // )
 
     if (newValue > oldValue) {
       self.setIcon('▲', 'green');
@@ -47292,7 +47287,6 @@ function _ref19(dispose) {
       context.font = `${fontSize}px Arial`;
       const { width } = context.measureText(char);
       context.fillText(char, size / 2 - width / 2, fontSize);
-      // ipcRenderer.send('set-icon', canvas.toDataURL())
     },
     beforeDestroy() {
       disposables.forEach(_ref19);
