@@ -44110,23 +44110,24 @@ const Counter = Object(__WEBPACK_IMPORTED_MODULE_2_mobx_react__["c" /* observer 
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return App; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__("./node_modules/react/index.js");
+/* WEBPACK VAR INJECTION */(function(module) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__("./node_modules/react/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_classnames__ = __webpack_require__("./node_modules/classnames/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_classnames___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_classnames__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_mobx_react__ = __webpack_require__("./node_modules/mobx-react/index.module.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_open_color__ = __webpack_require__("./node_modules/open-color/open-color.json");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_open_color___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_open_color__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__input__ = __webpack_require__("./src/app/input.jsx");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ticker__ = __webpack_require__("./src/app/ticker.jsx");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__counter__ = __webpack_require__("./src/app/counter.jsx");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__spinner__ = __webpack_require__("./src/app/spinner.jsx");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__period_switcher__ = __webpack_require__("./src/app/period-switcher.jsx");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pretty_price__ = __webpack_require__("./src/app/pretty-price.jsx");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pretty_percent__ = __webpack_require__("./src/app/pretty-percent.jsx");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__virtual_list__ = __webpack_require__("./src/app/virtual-list.jsx");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__data_base_currencies__ = __webpack_require__("./src/data/base-currencies.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_hot_loader__ = __webpack_require__("./node_modules/react-hot-loader/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_hot_loader___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_react_hot_loader__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__input__ = __webpack_require__("./src/app/input.jsx");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ticker__ = __webpack_require__("./src/app/ticker.jsx");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__counter__ = __webpack_require__("./src/app/counter.jsx");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__spinner__ = __webpack_require__("./src/app/spinner.jsx");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__period_switcher__ = __webpack_require__("./src/app/period-switcher.jsx");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pretty_price__ = __webpack_require__("./src/app/pretty-price.jsx");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pretty_percent__ = __webpack_require__("./src/app/pretty-percent.jsx");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__virtual_list__ = __webpack_require__("./src/app/virtual-list.jsx");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__data_base_currencies__ = __webpack_require__("./src/data/base-currencies.js");
 var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
 
 var _dec, _class;
@@ -44153,8 +44154,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 
+
 function _renderItem(ticker) {
-  return _jsx(__WEBPACK_IMPORTED_MODULE_5__ticker__["a" /* default */], {
+  return _jsx(__WEBPACK_IMPORTED_MODULE_6__ticker__["a" /* default */], {
     ticker: ticker
   }, ticker.id);
 }
@@ -44174,23 +44176,23 @@ function _render() {
   }, void 0, _jsx('div', {
     className: 'flex flex-column items-end',
     style: { fontSize: 11, width: 70 }
-  }, void 0, _jsx('div', {}, void 0, _jsx(__WEBPACK_IMPORTED_MODULE_10__pretty_percent__["a" /* default */], {
+  }, void 0, _jsx('div', {}, void 0, _jsx(__WEBPACK_IMPORTED_MODULE_11__pretty_percent__["a" /* default */], {
     value: store.portfolioChange1h
-  }), ' 1H'), _jsx('div', {}, void 0, _jsx(__WEBPACK_IMPORTED_MODULE_10__pretty_percent__["a" /* default */], {
+  }), ' 1H'), _jsx('div', {}, void 0, _jsx(__WEBPACK_IMPORTED_MODULE_11__pretty_percent__["a" /* default */], {
     value: store.portfolioChange1d
-  }), ' 1D'), _jsx('div', {}, void 0, _jsx(__WEBPACK_IMPORTED_MODULE_10__pretty_percent__["a" /* default */], {
+  }), ' 1D'), _jsx('div', {}, void 0, _jsx(__WEBPACK_IMPORTED_MODULE_11__pretty_percent__["a" /* default */], {
     value: store.portfolioChange7d
   }), ' 7D'))), _jsx('div', {
     className: 'flex flex-auto flex-row items-center justify-center'
   }, void 0, _jsx('span', {
     className: 'f3 mr3'
-  }, void 0, _jsx(__WEBPACK_IMPORTED_MODULE_9__pretty_price__["a" /* default */], {
+  }, void 0, _jsx(__WEBPACK_IMPORTED_MODULE_10__pretty_price__["a" /* default */], {
     amount: store.portfolioValue
   })), _jsx('select', {
     className: 'input-reset outline-0 color-inherit bn bg-transparent f5 pointer mt1 p0',
     defaultValue: store.baseCurrency,
     onChange: e => store.setBaseCurrency(e.target.value)
-  }, void 0, __WEBPACK_IMPORTED_MODULE_12__data_base_currencies__["a" /* default */].map(_ref)))), _jsx('div', {
+  }, void 0, __WEBPACK_IMPORTED_MODULE_13__data_base_currencies__["a" /* default */].map(_ref)))), _jsx('div', {
     className: 'flex flex-none ph2 pv2 bb b--black-10 justify-between'
   }, void 0, _jsx('div', {
     className: __WEBPACK_IMPORTED_MODULE_1_classnames___default()('pointer ba ph2 pv1 br2 b--gray-7 mr2', {
@@ -44198,7 +44200,7 @@ function _render() {
       'bg-transparent': !store.showOnlyHolding
     }),
     onClick: store.toggleOnlyHolding
-  }, void 0, 'HOLD'), _jsx(__WEBPACK_IMPORTED_MODULE_8__period_switcher__["a" /* default */], {})), _jsx(__WEBPACK_IMPORTED_MODULE_11__virtual_list__["a" /* default */], {
+  }, void 0, 'HOLD'), _jsx(__WEBPACK_IMPORTED_MODULE_9__period_switcher__["a" /* default */], {})), _jsx(__WEBPACK_IMPORTED_MODULE_12__virtual_list__["a" /* default */], {
     items: store.matchingTickers,
     itemHeight: 100,
     renderItem: this.renderItem
@@ -44209,7 +44211,7 @@ function _render() {
     onClick: () => {
       store.setCoinMarketCapIOKey('');
     }
-  }, void 0, 'Unlink with CoinMarketCap.io') : _jsx(__WEBPACK_IMPORTED_MODULE_4__input__["a" /* default */], {
+  }, void 0, 'Unlink with CoinMarketCap.io') : _jsx(__WEBPACK_IMPORTED_MODULE_5__input__["a" /* default */], {
     className: 'ba ph2 pv1 br2 b--gray-7',
     type: 'text',
     placeholder: 'Coinmarketcap.io Key',
@@ -44234,6 +44236,9 @@ let App = (_dec = Object(__WEBPACK_IMPORTED_MODULE_2_mobx_react__["b" /* inject 
   return App;
 }(__WEBPACK_IMPORTED_MODULE_0_react___default.a.Component)) || _class) || _class);
 
+
+/* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_4_react_hot_loader__["hot"])(module)(App));
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__("./node_modules/webpack/buildin/harmony-module.js")(module)))
 
 /***/ }),
 
@@ -44767,7 +44772,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 
-function _componentWillMount() {
+function _componentDidMount() {
   this.props.ticker.setIsVisible(true);
 }
 
@@ -44837,7 +44842,7 @@ let Ticker = Object(__WEBPACK_IMPORTED_MODULE_2_mobx_react__["c" /* observer */]
     return _possibleConstructorReturn(this, _React$Component.apply(this, arguments));
   }
 
-  Ticker.prototype.componentWillMount = _componentWillMount;
+  Ticker.prototype.componentDidMount = _componentDidMount;
   Ticker.prototype.componentWillUnmount = _componentWillUnmount;
   Ticker.prototype.render = _render;
   return Ticker;
@@ -44960,7 +44965,12 @@ function _render() {
     {
       ref: 'container',
       onScroll: this.onScroll,
-      style: { flex: 1, flexDirection: 'column', maxWidth: '100%', overflowY: 'overlay' }
+      style: {
+        flex: 1,
+        flexDirection: 'column',
+        maxWidth: '100%',
+        overflowY: 'overlay'
+      }
     },
     _jsx('div', {
       style: {
@@ -45070,7 +45080,13 @@ let Container = Object(__WEBPACK_IMPORTED_MODULE_4_mobx_react__["c" /* observer 
 
 function _render2() {
   return _jsx('div', {
-    style: { display: 'flex', flex: 1, flexDirection: 'row', overflow: 'hidden', WebkitAppRegion: 'no-drag' }
+    style: {
+      display: 'flex',
+      flex: 1,
+      flexDirection: 'row',
+      overflow: 'hidden',
+      WebkitAppRegion: 'no-drag'
+    }
   }, void 0, __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(Container, this.props));
 }
 
@@ -45127,13 +45143,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_mobx__ = __webpack_require__("./node_modules/mobx/lib/mobx.module.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_mobx_react__ = __webpack_require__("./node_modules/mobx-react/index.module.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_hot_loader__ = __webpack_require__("./node_modules/react-hot-loader/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_hot_loader___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_react_hot_loader__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_mobx_state_tree__ = __webpack_require__("./node_modules/mobx-state-tree/dist/mobx-state-tree.module.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_lodash__ = __webpack_require__("./node_modules/lodash/lodash.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_lodash__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__app__ = __webpack_require__("./src/app/index.jsx");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__store__ = __webpack_require__("./src/store/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_mobx_state_tree__ = __webpack_require__("./node_modules/mobx-state-tree/dist/mobx-state-tree.module.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_lodash__ = __webpack_require__("./node_modules/lodash/lodash.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_lodash__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__app__ = __webpack_require__("./src/app/index.jsx");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__store__ = __webpack_require__("./src/store/index.js");
 var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
 
 
@@ -45146,27 +45160,26 @@ var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" &
 
 
 
-
-const store = __WEBPACK_IMPORTED_MODULE_8__store__["a" /* default */].create(localStorage.store ? JSON.parse(localStorage.store) : {});
+const store = __WEBPACK_IMPORTED_MODULE_7__store__["a" /* default */].create(localStorage.store ? JSON.parse(localStorage.store) : {});
 
 Object(__WEBPACK_IMPORTED_MODULE_2_mobx__["u" /* useStrict */])(true);
 
 function render() {
-  __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(_jsx(__WEBPACK_IMPORTED_MODULE_4_react_hot_loader__["AppContainer"], {}, void 0, _jsx(__WEBPACK_IMPORTED_MODULE_3_mobx_react__["a" /* Provider */], {
+  __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(_jsx(__WEBPACK_IMPORTED_MODULE_3_mobx_react__["a" /* Provider */], {
     store: store
-  }, void 0, _jsx(__WEBPACK_IMPORTED_MODULE_7__app__["a" /* default */], {}))), document.querySelector('#root'));
+  }, void 0, _jsx(__WEBPACK_IMPORTED_MODULE_6__app__["a" /* default */], {})), document.querySelector('#root'));
 }
 
-Object(__WEBPACK_IMPORTED_MODULE_5_mobx_state_tree__["e" /* onSnapshot */])(store, Object(__WEBPACK_IMPORTED_MODULE_6_lodash__["debounce"])(snapshot => {
+Object(__WEBPACK_IMPORTED_MODULE_4_mobx_state_tree__["e" /* onSnapshot */])(store, Object(__WEBPACK_IMPORTED_MODULE_5_lodash__["debounce"])(snapshot => {
   localStorage.store = JSON.stringify(snapshot);
 }, 1000));
 
 function _ref() {
-  Object(__WEBPACK_IMPORTED_MODULE_5_mobx_state_tree__["a" /* applySnapshot */])(store, module.hot.data.store);
+  Object(__WEBPACK_IMPORTED_MODULE_4_mobx_state_tree__["a" /* applySnapshot */])(store, module.hot.data.store);
 }
 
 function _ref2(data) {
-  data.store = Object(__WEBPACK_IMPORTED_MODULE_5_mobx_state_tree__["d" /* getSnapshot */])(store);
+  data.store = Object(__WEBPACK_IMPORTED_MODULE_4_mobx_state_tree__["d" /* getSnapshot */])(store);
 }
 
 if (false) {
@@ -45570,7 +45583,6 @@ function _ref19(dispose) {
   }
 
   function _ref16({ oldValue, newValue }) {
-
     if (newValue > oldValue) {
       self.setIcon('▲', 'green');
     } else if (newValue < oldValue) {
@@ -45614,21 +45626,21 @@ function _ref19(dispose) {
     beforeDestroy() {
       disposables.forEach(_ref19);
     },
-    async fetchTickers() {
+    fetchTickers: Object(__WEBPACK_IMPORTED_MODULE_2_mobx_state_tree__["b" /* flow */])(function* () {
       self.setIsFetching(true);
       try {
         const url = new URL('https://api.coinmarketcap.com/v1/ticker/');
         url.searchParams.append('convert', self.baseCurrency);
         // url.searchParams.append('limit', self.tickerLimit)
         url.searchParams.append('fresh', Date.now());
-        const response = await fetch(url);
-        self.setTickers((await response.json()));
+        const response = yield fetch(url);
+        self.setTickers((yield response.json()));
       } finally {
         self.setIsFetching(false);
         self.touch();
       }
-    },
-    async fetchCoinMarketCapIOHoldings() {
+    }),
+    fetchCoinMarketCapIOHoldings: Object(__WEBPACK_IMPORTED_MODULE_2_mobx_state_tree__["b" /* flow */])(function* () {
       const url = 'https://cmc.tools/server/api.php';
       const form = new FormData();
       const opts = {
@@ -45652,11 +45664,11 @@ function _ref19(dispose) {
       });
 
       try {
-        const res = await fetch(url, {
+        const res = yield fetch(url, {
           method: 'post',
           body: form
         });
-        const json = await res.json();
+        const json = yield res.json();
         self.tickers.values().forEach(ticker => {
           const match = json.coin_list.find(c => c.cmc_id === ticker.id);
           if (match) {
@@ -45666,7 +45678,7 @@ function _ref19(dispose) {
       } catch (err) {
         self.setCoinMarketCapIOKey('');
       }
-    },
+    }),
     touch() {
       self.lastUpdate = Date.now();
     },
