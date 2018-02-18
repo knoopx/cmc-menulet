@@ -44772,7 +44772,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 
-function _componentDidMount() {
+function _componentWillMount() {
   this.props.ticker.setIsVisible(true);
 }
 
@@ -44842,7 +44842,7 @@ let Ticker = Object(__WEBPACK_IMPORTED_MODULE_2_mobx_react__["c" /* observer */]
     return _possibleConstructorReturn(this, _React$Component.apply(this, arguments));
   }
 
-  Ticker.prototype.componentDidMount = _componentDidMount;
+  Ticker.prototype.componentWillMount = _componentWillMount;
   Ticker.prototype.componentWillUnmount = _componentWillUnmount;
   Ticker.prototype.render = _render;
   return Ticker;
@@ -44947,6 +44947,11 @@ function _onScroll(e) {
   this.scroll(e.target.scrollTop);
 }
 
+function _scroll(scrollTop) {
+  this.setScrollTop(scrollTop);
+  this.setIsScrolling(false);
+}
+
 function _setIsScrolling(value) {
   this.isScrolling = value;
 }
@@ -45022,16 +45027,14 @@ let Container = Object(__WEBPACK_IMPORTED_MODULE_4_mobx_react__["c" /* observer 
 
     _classCallCheck(this, Container);
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _React$Component.call(this, ...args)), _this), _initDefineProp(_this, 'isScrolling', _descriptor, _this), _initDefineProp(_this, 'scrollTop', _descriptor2, _this), _initDefineProp(_this, 'clientHeight', _descriptor3, _this), _this.scroll = Object(__WEBPACK_IMPORTED_MODULE_2_lodash__["debounce"])(scrollTop => {
-      _this.setScrollTop(scrollTop);
-      _this.setIsScrolling(false);
-    }, 100), _this.onResize = _this.onResize.bind(_this), _this.onScroll = _this.onScroll.bind(_this), _this.setIsScrolling = _this.setIsScrolling.bind(_this), _this.setScrollTop = _this.setScrollTop.bind(_this), _this.setClientHeight = _this.setClientHeight.bind(_this), _temp), _possibleConstructorReturn(_this, _ret);
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _React$Component.call(this, ...args)), _this), _initDefineProp(_this, 'isScrolling', _descriptor, _this), _initDefineProp(_this, 'scrollTop', _descriptor2, _this), _initDefineProp(_this, 'clientHeight', _descriptor3, _this), _this.onResize = _this.onResize.bind(_this), _this.onScroll = _this.onScroll.bind(_this), _this.scroll = _this.scroll.bind(_this), _this.setIsScrolling = _this.setIsScrolling.bind(_this), _this.setScrollTop = _this.setScrollTop.bind(_this), _this.setClientHeight = _this.setClientHeight.bind(_this), _temp), _possibleConstructorReturn(_this, _ret);
   }
 
   Container.prototype.componentDidMount = _componentDidMount;
   Container.prototype.componentWillUnmount = _componentWillUnmount;
   Container.prototype.onResize = _onResize;
   Container.prototype.onScroll = _onScroll;
+  Container.prototype.scroll = _scroll;
   Container.prototype.setIsScrolling = _setIsScrolling;
   Container.prototype.setScrollTop = _setScrollTop;
   Container.prototype.setClientHeight = _setClientHeight;
@@ -45137,17 +45140,19 @@ let VirtualList = Object(__WEBPACK_IMPORTED_MODULE_4_mobx_react__["c" /* observe
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* WEBPACK VAR INJECTION */(function(module) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__("./node_modules/react/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__("./node_modules/react-dom/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_mobx__ = __webpack_require__("./node_modules/mobx/lib/mobx.module.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_mobx_react__ = __webpack_require__("./node_modules/mobx-react/index.module.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_mobx_state_tree__ = __webpack_require__("./node_modules/mobx-state-tree/dist/mobx-state-tree.module.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_lodash__ = __webpack_require__("./node_modules/lodash/lodash.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_lodash__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__app__ = __webpack_require__("./src/app/index.jsx");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__store__ = __webpack_require__("./src/store/index.js");
+/* WEBPACK VAR INJECTION */(function(module) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_hot_loader__ = __webpack_require__("./node_modules/react-hot-loader/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_hot_loader___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react_hot_loader__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react__ = __webpack_require__("./node_modules/react/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_dom__ = __webpack_require__("./node_modules/react-dom/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react_dom__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_mobx__ = __webpack_require__("./node_modules/mobx/lib/mobx.module.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_mobx_react__ = __webpack_require__("./node_modules/mobx-react/index.module.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_mobx_state_tree__ = __webpack_require__("./node_modules/mobx-state-tree/dist/mobx-state-tree.module.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_lodash__ = __webpack_require__("./node_modules/lodash/lodash.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_lodash__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__app__ = __webpack_require__("./src/app/index.jsx");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__store__ = __webpack_require__("./src/store/index.js");
 var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
 
 
@@ -45160,26 +45165,27 @@ var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" &
 
 
 
-const store = __WEBPACK_IMPORTED_MODULE_7__store__["a" /* default */].create(localStorage.store ? JSON.parse(localStorage.store) : {});
 
-Object(__WEBPACK_IMPORTED_MODULE_2_mobx__["u" /* useStrict */])(true);
+const store = __WEBPACK_IMPORTED_MODULE_8__store__["a" /* default */].create(localStorage.store ? JSON.parse(localStorage.store) : {});
+
+Object(__WEBPACK_IMPORTED_MODULE_3_mobx__["u" /* useStrict */])(true);
 
 function render() {
-  __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(_jsx(__WEBPACK_IMPORTED_MODULE_3_mobx_react__["a" /* Provider */], {
+  __WEBPACK_IMPORTED_MODULE_2_react_dom___default.a.render(_jsx(__WEBPACK_IMPORTED_MODULE_4_mobx_react__["a" /* Provider */], {
     store: store
-  }, void 0, _jsx(__WEBPACK_IMPORTED_MODULE_6__app__["a" /* default */], {})), document.querySelector('#root'));
+  }, void 0, _jsx(__WEBPACK_IMPORTED_MODULE_7__app__["a" /* default */], {})), document.querySelector('#root'));
 }
 
-Object(__WEBPACK_IMPORTED_MODULE_4_mobx_state_tree__["e" /* onSnapshot */])(store, Object(__WEBPACK_IMPORTED_MODULE_5_lodash__["debounce"])(snapshot => {
+Object(__WEBPACK_IMPORTED_MODULE_5_mobx_state_tree__["e" /* onSnapshot */])(store, Object(__WEBPACK_IMPORTED_MODULE_6_lodash__["debounce"])(snapshot => {
   localStorage.store = JSON.stringify(snapshot);
 }, 1000));
 
 function _ref() {
-  Object(__WEBPACK_IMPORTED_MODULE_4_mobx_state_tree__["a" /* applySnapshot */])(store, module.hot.data.store);
+  Object(__WEBPACK_IMPORTED_MODULE_5_mobx_state_tree__["a" /* applySnapshot */])(store, module.hot.data.store);
 }
 
 function _ref2(data) {
-  data.store = Object(__WEBPACK_IMPORTED_MODULE_4_mobx_state_tree__["d" /* getSnapshot */])(store);
+  data.store = Object(__WEBPACK_IMPORTED_MODULE_5_mobx_state_tree__["d" /* getSnapshot */])(store);
 }
 
 if (false) {
