@@ -4172,13 +4172,6 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 /***/ }),
 
-/***/ "./node_modules/cryptocoins-icons/webfont/cryptocoins.css":
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-
 /***/ "./node_modules/d3-array/index.js":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -45140,19 +45133,17 @@ let VirtualList = Object(__WEBPACK_IMPORTED_MODULE_4_mobx_react__["c" /* observe
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* WEBPACK VAR INJECTION */(function(module) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_hot_loader__ = __webpack_require__("./node_modules/react-hot-loader/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_hot_loader___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react_hot_loader__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react__ = __webpack_require__("./node_modules/react/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_dom__ = __webpack_require__("./node_modules/react-dom/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react_dom__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_mobx__ = __webpack_require__("./node_modules/mobx/lib/mobx.module.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_mobx_react__ = __webpack_require__("./node_modules/mobx-react/index.module.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_mobx_state_tree__ = __webpack_require__("./node_modules/mobx-state-tree/dist/mobx-state-tree.module.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_lodash__ = __webpack_require__("./node_modules/lodash/lodash.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_lodash__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__app__ = __webpack_require__("./src/app/index.jsx");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__store__ = __webpack_require__("./src/store/index.js");
+/* WEBPACK VAR INJECTION */(function(module) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__("./node_modules/react/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__("./node_modules/react-dom/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_mobx__ = __webpack_require__("./node_modules/mobx/lib/mobx.module.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_mobx_react__ = __webpack_require__("./node_modules/mobx-react/index.module.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_mobx_state_tree__ = __webpack_require__("./node_modules/mobx-state-tree/dist/mobx-state-tree.module.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_lodash__ = __webpack_require__("./node_modules/lodash/lodash.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_lodash__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__app__ = __webpack_require__("./src/app/index.jsx");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__store__ = __webpack_require__("./src/store/index.js");
 var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
 
 
@@ -45165,27 +45156,26 @@ var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" &
 
 
 
+const store = __WEBPACK_IMPORTED_MODULE_7__store__["a" /* default */].create(localStorage.store ? JSON.parse(localStorage.store) : {});
 
-const store = __WEBPACK_IMPORTED_MODULE_8__store__["a" /* default */].create(localStorage.store ? JSON.parse(localStorage.store) : {});
-
-Object(__WEBPACK_IMPORTED_MODULE_3_mobx__["u" /* useStrict */])(true);
+Object(__WEBPACK_IMPORTED_MODULE_2_mobx__["u" /* useStrict */])(true);
 
 function render() {
-  __WEBPACK_IMPORTED_MODULE_2_react_dom___default.a.render(_jsx(__WEBPACK_IMPORTED_MODULE_4_mobx_react__["a" /* Provider */], {
+  __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(_jsx(__WEBPACK_IMPORTED_MODULE_3_mobx_react__["a" /* Provider */], {
     store: store
-  }, void 0, _jsx(__WEBPACK_IMPORTED_MODULE_7__app__["a" /* default */], {})), document.querySelector('#root'));
+  }, void 0, _jsx(__WEBPACK_IMPORTED_MODULE_6__app__["a" /* default */], {})), document.querySelector('#root'));
 }
 
-Object(__WEBPACK_IMPORTED_MODULE_5_mobx_state_tree__["e" /* onSnapshot */])(store, Object(__WEBPACK_IMPORTED_MODULE_6_lodash__["debounce"])(snapshot => {
+Object(__WEBPACK_IMPORTED_MODULE_4_mobx_state_tree__["e" /* onSnapshot */])(store, Object(__WEBPACK_IMPORTED_MODULE_5_lodash__["debounce"])(snapshot => {
   localStorage.store = JSON.stringify(snapshot);
 }, 1000));
 
 function _ref() {
-  Object(__WEBPACK_IMPORTED_MODULE_5_mobx_state_tree__["a" /* applySnapshot */])(store, module.hot.data.store);
+  Object(__WEBPACK_IMPORTED_MODULE_4_mobx_state_tree__["a" /* applySnapshot */])(store, module.hot.data.store);
 }
 
 function _ref2(data) {
-  data.store = Object(__WEBPACK_IMPORTED_MODULE_5_mobx_state_tree__["d" /* getSnapshot */])(store);
+  data.store = Object(__WEBPACK_IMPORTED_MODULE_4_mobx_state_tree__["d" /* getSnapshot */])(store);
 }
 
 if (false) {
@@ -45801,7 +45791,6 @@ function _ref(x) {
 
 __webpack_require__("./node_modules/tachyons/css/tachyons.css");
 __webpack_require__("./node_modules/tachyons-open-color/index.css");
-__webpack_require__("./node_modules/cryptocoins-icons/webfont/cryptocoins.css");
 __webpack_require__("./src/index.css");
 module.exports = __webpack_require__("./src/index.jsx");
 
