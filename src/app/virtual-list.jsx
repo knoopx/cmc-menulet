@@ -1,18 +1,27 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-import { debounce } from 'lodash'
 import { observable, computed, action, runInAction } from 'mobx'
 import { propTypes, observer } from 'mobx-react'
 
 @observer
-class Container extends React.Component {
-  @observable isScrolling = false
+export default class VirtualList extends React.Component {
+  static propTypes = {
+    items: propTypes.arrayOrObservableArray.isRequired,
+    itemHeight: PropTypes.number.isRequired,
+    renderItem: PropTypes.func.isRequired,
+    bufferSize: PropTypes.number.isRequired,
+  }
+
+  static defaultProps = {
+    bufferSize: 0,
+  }
+
   @observable scrollTop = 0
   @observable clientHeight = 0
 
   componentDidMount() {
-    this.setScrollTop(this.refs.container.scrollTop)
-    this.setClientHeight(this.refs.container.clientHeight)
+    this.setScrollTop(this.container.scrollTop)
+    this.setClientHeight(this.container.clientHeight)
     window.addEventListener('resize', this.onResize)
   }
 
@@ -20,25 +29,14 @@ class Container extends React.Component {
     window.removeEventListener('resize', this.onResize)
   }
 
-  onResize() {
-    if (this.refs.container) {
-      this.setClientHeight(this.refs.container.clientHeight)
+  onResize = () => {
+    if (this.container) {
+      this.setClientHeight(this.container.clientHeight)
     }
   }
 
-  onScroll(e) {
-    this.setIsScrolling(true)
-    this.scroll(e.target.scrollTop)
-  }
-
-  scroll(scrollTop) {
-    this.setScrollTop(scrollTop)
-    this.setIsScrolling(false)
-  }
-
-  @action
-  setIsScrolling(value) {
-    this.isScrolling = value
+  onScroll = (e) => {
+    this.setScrollTop(e.target.scrollTop)
   }
 
   @action
@@ -49,6 +47,23 @@ class Container extends React.Component {
   @action
   setClientHeight(value) {
     this.clientHeight = value
+  }
+
+  setContainer = (container) => {
+    if (container) {
+      this.container = container
+      runInAction(() => {
+        this.setScrollTop(container.scrollTop)
+        this.setClientHeight(container.clientHeight)
+      })
+    }
+  }
+
+  scrollToTop() {
+    if (this.container) {
+      this.container.scrollTop = 0
+      this.setScrollTop(0)
+    }
   }
 
   @computed
@@ -98,50 +113,6 @@ class Container extends React.Component {
   render() {
     return (
       <div
-        ref="container"
-        onScroll={this.onScroll}
-        style={{
-          flex: 1,
-          flexDirection: 'column',
-          maxWidth: '100%',
-          overflowY: 'overlay',
-        }}
-      >
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            height: this.totalHeight - this.visibleItemsOffsetY,
-            transform: `translateY(${this.visibleItemsOffsetY}px)`,
-            overflow: 'hidden',
-            willChange: 'transform',
-            contain: 'paint',
-          }}
-        >
-          {this.visibleItems.map((item, index) =>
-            this.props.renderItem(item, index, this.isScrolling))}
-        </div>
-      </div>
-    )
-  }
-}
-
-@observer
-export default class VirtualList extends React.Component {
-  static propTypes = {
-    items: propTypes.arrayOrObservableArray.isRequired,
-    itemHeight: PropTypes.number.isRequired,
-    renderItem: PropTypes.func.isRequired,
-    bufferSize: PropTypes.number.isRequired,
-  }
-
-  static defaultProps = {
-    bufferSize: 0,
-  }
-
-  render() {
-    return (
-      <div
         style={{
           display: 'flex',
           flex: 1,
@@ -150,7 +121,29 @@ export default class VirtualList extends React.Component {
           WebkitAppRegion: 'no-drag',
         }}
       >
-        <Container {...this.props} />
+        <div
+          ref={this.setContainer}
+          style={{
+            flex: 1,
+            flexDirection: 'column',
+            maxWidth: '100%',
+            overflowY: 'auto',
+          }}
+          onScroll={this.onScroll}
+        >
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              height: this.totalHeight - this.visibleItemsOffsetY,
+              transform: `translateY(${this.visibleItemsOffsetY}px)`,
+              overflow: 'hidden',
+              contain: 'paint',
+            }}
+          >
+            {this.visibleItems.map(this.props.renderItem)}
+          </div>
+        </div>
       </div>
     )
   }
