@@ -121,7 +121,6 @@ export default types
           }
         }))
         disposables.push(observe(self, 'portfolioValue', ({ oldValue, newValue }) => {
-
           if (newValue > oldValue) {
             self.setIcon('▲', 'green')
           } else if (newValue < oldValue) {
