@@ -1,20 +1,38 @@
 {
   "name": "cmc-menulet",
   "productName": "CoinMarketCap",
+  "author": "Víctor Martínez",
   "version": "0.1.1",
   "description": "CoinMarketCap Menulet",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "build": "yarn build:icon && yarn build:webpack",
+    "build": "yarn build:icon && yarn build:clean && yarn build:webpack",
+    "build:clean": "rimraf dist",
     "build:webpack": "cross-env NODE_ENV=production webpack",
-    "build:icon": "mkdir -p Icon.iconset && sips -z 16 16 Icon.png --out Icon.iconset/icon_16x16.png && sips -z 32 32 Icon.png --out Icon.iconset/icon_16x16@2x.png && sips -z 32 32 Icon.png --out Icon.iconset/icon_32x32.png && sips -z 64 64 Icon.png --out Icon.iconset/icon_32x32@2x.png && sips -z 128 128 Icon.png --out Icon.iconset/icon_128x128.png && sips -z 256 256 Icon.png --out Icon.iconset/icon_128x128@2x.png && sips -z 256 256 Icon.png --out Icon.iconset/icon_256x256.png && sips -z 512 512 Icon.png --out Icon.iconset/icon_256x256@2x.png && sips -z 512 512 Icon.png --out Icon.iconset/icon_512x512.png && iconutil -c icns Icon.iconset && rm -rf Icon.iconset",
-    "package": "electron-packager . --asar --overwrite --out=release --package-manager yarn --icon=Icon.icns",
-    "package:all": "electron-packager . --platform win32 --platform darwin --asar --overwrite --out=release --package-manager yarn --icon=Icon.icns",
-    "release": "cross-env NODE_ENV=production yarn run build && yarn run package",
-    "release:all": "cross-env NODE_ENV=production yarn run build && yarn run package:all",
-    "production": "cross-env NODE_ENV=production yarn run build && yarn run start",
+    "build:icon":
+      "mkdir -p Icon.iconset && sips -z 16 16 Icon.png --out Icon.iconset/icon_16x16.png && sips -z 32 32 Icon.png --out Icon.iconset/icon_16x16@2x.png && sips -z 32 32 Icon.png --out Icon.iconset/icon_32x32.png && sips -z 64 64 Icon.png --out Icon.iconset/icon_32x32@2x.png && sips -z 128 128 Icon.png --out Icon.iconset/icon_128x128.png && sips -z 256 256 Icon.png --out Icon.iconset/icon_128x128@2x.png && sips -z 256 256 Icon.png --out Icon.iconset/icon_256x256.png && sips -z 512 512 Icon.png --out Icon.iconset/icon_256x256@2x.png && sips -z 512 512 Icon.png --out Icon.iconset/icon_512x512.png && iconutil -c icns Icon.iconset && rm -rf Icon.iconset",
+    "package": "electron-builder --publish always",
+    "release":
+      "cross-env NODE_ENV=production yarn run build && yarn run package",
+    "release:all":
+      "cross-env NODE_ENV=production yarn run build && yarn run package:all",
+    "production":
+      "cross-env NODE_ENV=production yarn run build && yarn run start",
     "development": "cross-env NODE_ENV=development yarn run start"
+  },
+  "build": {
+    "appId": "net.knoopx.CoinMarketCap",
+    "files": ["main.js", "IconTemplate*", "dist/**/*"],
+    "directories": {
+      "output": "release"
+    },
+    "mac": {
+      "icon": "Icon.icns",
+      "target": "dir",
+      "category": "public.app-category.finance",
+      "publish": ["github"]
+    }
   },
   "dependencies": {
     "electron-default-menu": "^1.0.1",
@@ -46,7 +64,7 @@
     "cryptocoins-icons": "^2.7.0",
     "css-loader": "^0.28.10",
     "electron": "^1.8.2",
-    "electron-packager": "^11.0.1",
+    "electron-builder": "^20.2.0",
     "eslint": "^4.18.1",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-import-resolver-webpack": "^0.8.4",
@@ -55,7 +73,7 @@
     "eslint-plugin-react": "^7.7.0",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "file-loader": "^1.1.10",
-    "html-webpack-plugin": "^3.0.3",
+    "html-webpack-plugin": "^3.0.4",
     "json-loader": "^0.5.7",
     "lodash": "^4.17.5",
     "mobx": "^3.6.1",
@@ -70,6 +88,7 @@
     "react-hot-loader": "^4.0.0",
     "react-icons": "^2.2.7",
     "react-motion": "^0.5.2",
+    "rimraf": "^2.6.2",
     "style-loader": "^0.20.2",
     "tachyons": "^4.9.1",
     "tachyons-open-color": "knoopx/tachyons-open-color",
