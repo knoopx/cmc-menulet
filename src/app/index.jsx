@@ -2,6 +2,7 @@ import React from 'react'
 import classNames from 'classnames'
 import { observer, inject } from 'mobx-react'
 import { gray } from 'open-color'
+import { hot } from 'react-hot-loader'
 
 import Input from './input'
 import Ticker from './ticker'
@@ -16,7 +17,7 @@ import baseCurrencies from '../data/base-currencies'
 
 @inject('store')
 @observer
-export default class App extends React.Component {
+class App extends React.Component {
   renderItem(ticker) {
     return <Ticker key={ticker.id} ticker={ticker} />
   }
@@ -114,3 +115,5 @@ export default class App extends React.Component {
     )
   }
 }
+
+export default hot(module)(App)

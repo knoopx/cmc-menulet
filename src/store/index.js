@@ -1,6 +1,6 @@
 import numeral from 'numeral'
 import { sum, sortBy } from 'lodash'
-import { types, getSnapshot } from 'mobx-state-tree'
+import { types, flow, getSnapshot } from 'mobx-state-tree'
 import { autorun, observe, untracked } from 'mobx'
 import { now } from 'mobx-utils'
 import { ipcRenderer, nativeImage } from 'electron'
@@ -161,21 +161,21 @@ export default types
           dispose()
         })
       },
-      async fetchTickers() {
+      fetchTickers: flow(function* () {
         self.setIsFetching(true)
         try {
           const url = new URL('https://api.coinmarketcap.com/v1/ticker/')
           url.searchParams.append('convert', self.baseCurrency)
           // url.searchParams.append('limit', self.tickerLimit)
           url.searchParams.append('fresh', Date.now())
-          const response = await fetch(url)
-          self.setTickers(await response.json())
+          const response = yield fetch(url)
+          self.setTickers(yield response.json())
         } finally {
           self.setIsFetching(false)
           self.touch()
         }
-      },
-      async fetchCoinMarketCapIOHoldings() {
+      }),
+      fetchCoinMarketCapIOHoldings: flow(function* () {
         const url = 'https://cmc.tools/server/api.php'
         const form = new FormData()
         const opts = {
@@ -199,11 +199,11 @@ export default types
         })
 
         try {
-          const res = await fetch(url, {
+          const res = yield fetch(url, {
             method: 'post',
             body: form,
           })
-          const json = await res.json()
+          const json = yield res.json()
           self.tickers.values().forEach((ticker) => {
             const match = json.coin_list.find(c => c.cmc_id === ticker.id)
             if (match) {
@@ -213,7 +213,7 @@ export default types
         } catch (err) {
           self.setCoinMarketCapIOKey('')
         }
-      },
+      }),
       touch() {
         self.lastUpdate = Date.now()
       },

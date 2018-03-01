@@ -2,7 +2,6 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { useStrict } from 'mobx'
 import { Provider } from 'mobx-react'
-import { AppContainer } from 'react-hot-loader'
 import { onSnapshot, getSnapshot, applySnapshot } from 'mobx-state-tree'
 import { debounce } from 'lodash'
 
@@ -15,18 +14,19 @@ useStrict(true)
 
 function render() {
   ReactDOM.render(
-    <AppContainer>
-      <Provider store={store}>
-        <App />
-      </Provider>
-    </AppContainer>
-    , document.querySelector('#root'),
+    <Provider store={store}>
+      <App />
+    </Provider>,
+    document.querySelector('#root'),
   )
 }
 
-onSnapshot(store, debounce((snapshot) => {
-  localStorage.store = JSON.stringify(snapshot)
-}, 1000))
+onSnapshot(
+  store,
+  debounce((snapshot) => {
+    localStorage.store = JSON.stringify(snapshot)
+  }, 1000),
+)
 
 if (module.hot) {
   module.hot.accept('./app', render)
