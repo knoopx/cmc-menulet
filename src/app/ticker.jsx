@@ -34,38 +34,63 @@ export default class Ticker extends React.Component {
     } = this.props.ticker
     return (
       <div
-        className="flex ph3 pv2 bb b--black-10 lh-copy items-center"
+        className="flex ph2 pv1 bb b--black-10 lh-copy items-center"
         style={{ height: 100 }}
         key={id}
       >
-        <div className="flex items-start" style={{ width: 160 }}>
-          <div className="mr3" style={{ minWidth: 24 }}>
-            <i className={classNames('f3 gray-6', `cc ${symbol}`)} />
-          </div>
-          <div className="flex-auto tr">
-            <div className="b gray-3 truncate">{symbol}</div>
-            <div className="f7 gray-6 truncate mb2">{name}</div>
-            <div className="gray-7 f7 flex">
-              <PrettyPrice className="flex-auto" amount={amount} />
-              <span className="ml1">{baseCurrency}</span>
+        <div className="flex items-start">
+          <div className="flex-auto">
+            <div className="b gray-3 tr">{symbol}</div>
+            <div className="flex items-end justify-between">
+              {/* <div className="f7">
+                <PrettyPrice className amount={price} /> {baseCurrency}
+              </div> */}
             </div>
-            <div className="gray-7 f7 flex">
-              <Input
-                className="flex-auto bn tr"
-                value={holdings}
-                onChange={(e) => {
-                  setHoldings(e.target.valueAsNumber)
-                }}
-              />
-              <span className="ml1">{symbol}</span>
+            {/* <i
+              style={{ minWidth: 24 }}
+              className={classNames('f3 gray-6', `cc ${symbol}`)}
+            /> */}
+            <div className="flex">
+              <div className="flex-auto">
+                {/* <div className="gray-7 f7 flex">
+                  <PrettyPrice className="flex-auto" amount={amount} />
+                  <span className="ml1">{baseCurrency}</span>
+                </div> */}
+                {/* <div className="gray-7 f7 flex">
+                  <Input
+                    className="flex-auto bn"
+                    value={holdings}
+                    onChange={(e) => {
+                      setHoldings(e.target.valueAsNumber)
+                    }}
+                  />
+                  <span className="ml1">{symbol}</span>
+                </div> */}
+              </div>
+
+              <div
+                className="flex flex-auto flex-column items-end"
+                style={{ fontSize: 11, width: 70 }}
+              >
+                <div className="nowrap">
+                  <PrettyPercent value={percent_change_1h} /> 1H
+                </div>
+                <div className="nowrap">
+                  <PrettyPercent value={percent_change_24h} /> 1D
+                </div>
+                <div className="nowrap">
+                  <PrettyPercent value={percent_change_7d} /> 7D
+                </div>
+              </div>
             </div>
           </div>
         </div>
-        <div className="flex flex-auto mh3">
+        <div className="flex flex-auto ml2">
           <TickerSparkline ticker={this.props.ticker} height={80} />
         </div>
-        <div
-          className="flex flex-column justify-end gray-3 tr"
+
+        {/* <div
+          className="flex flex-column justify-end gray-3"
           style={{ width: 160 }}
         >
           <div>
@@ -82,7 +107,7 @@ export default class Ticker extends React.Component {
               <PrettyPercent value={percent_change_7d} /> 7D
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     )
   }
