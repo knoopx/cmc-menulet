@@ -1,13 +1,12 @@
 const path = require('path')
 const webpack = require('webpack')
 const { productName, dependencies } = require('./package.json')
-const HappyPack = require('happypack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 module.exports = {
   target: 'electron-renderer',
-  devtool: process.env.NODE_ENV === 'production' ? 'source-map' : 'eval',
+  mode: process.env.NODE_ENV,
   entry: [
     'source-map-support/register',
     'tachyons/css/tachyons.css',
@@ -17,15 +16,7 @@ module.exports = {
     './src/index.jsx',
   ],
   plugins: [
-    new HappyPack({
-      loaders: ['babel-loader'],
-      threads: 4,
-    }),
-    new webpack.NoEmitOnErrorsPlugin(),
     new webpack.ExternalsPlugin('commonjs', Object.keys(dependencies)),
-    new webpack.NamedModulesPlugin(),
-    new webpack.EnvironmentPlugin({ NODE_ENV: 'development', CHANNEL: 'web' }),
-    new webpack.LoaderOptionsPlugin({ minimize: process.env.NODE_ENV === 'production' }),
     new ExtractTextPlugin('renderer.css'),
     new HtmlWebpackPlugin({
       title: productName,
@@ -39,11 +30,10 @@ module.exports = {
   },
   resolve: {
     modules: [path.resolve(__dirname, './src'), 'node_modules'],
-    aliasFields: ['browser'],
     extensions: ['.js', '.jsx', '.json', '.css'],
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.css/,
         use: ExtractTextPlugin.extract({
@@ -53,15 +43,11 @@ module.exports = {
       },
       {
         test: /\.jsx?$/,
-        use: 'happypack/loader',
+        use: 'babel-loader',
         include: [
           path.resolve('./src'),
           path.resolve('./node_modules/react-icons'),
         ],
-      },
-      {
-        test: /\.json$/,
-        use: 'json-loader',
       },
       {
         test: /\.(eot|svg|ttf|woff|woff2)$/,
