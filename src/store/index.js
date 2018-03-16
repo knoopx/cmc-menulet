@@ -1,7 +1,7 @@
 import numeral from 'numeral'
 import { sum, sortBy } from 'lodash'
 import { types, flow, getSnapshot } from 'mobx-state-tree'
-import { autorun, observe, untracked } from 'mobx'
+import { autorun, observe, untracked, values } from 'mobx'
 import { now } from 'mobx-utils'
 import { ipcRenderer, nativeImage } from 'electron'
 
@@ -67,10 +67,10 @@ export default types
       if (self.showOnlyHolding) {
         return self.holdingTickers
       }
-      return self.tickers.values()
+      return values(self.tickers)
     },
     get holdingTickers() {
-      return self.tickers.values().filter(({ holdings }) => holdings > 0)
+      return values(self.tickers).filter(({ holdings }) => holdings > 0)
     },
     get matchingTickers() {
       return sortBy(
