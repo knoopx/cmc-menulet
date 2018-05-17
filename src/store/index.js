@@ -1,9 +1,9 @@
 import numeral from 'numeral'
 import { sum, sortBy } from 'lodash'
-import { types, flow, getSnapshot } from 'mobx-state-tree'
+import { types, flow } from 'mobx-state-tree'
 import { autorun, observe, untracked, values } from 'mobx'
 import { now } from 'mobx-utils'
-import { ipcRenderer, nativeImage } from 'electron'
+import { ipcRenderer } from 'electron'
 
 import Ticker from './ticker'
 
