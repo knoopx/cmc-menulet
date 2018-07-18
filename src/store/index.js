@@ -51,7 +51,7 @@ function parseTicker({
 
 export default types
   .model('Store', {
-    lastUpdate: types.maybe(types.number),
+    lastUpdate: types.maybeNull(types.number),
     query: types.optional(types.string, ''),
     baseCurrency: types.optional(types.string, 'USD'),
     tickers: types.optional(types.map(Ticker), {}),

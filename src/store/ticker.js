@@ -6,27 +6,27 @@ import History from './history'
 const propTypes = baseCurrencies.map(x => x.toLocaleLowerCase()).reduce(
   (props, c) => ({
     ...props,
-    [`price_${c}`]: types.maybe(types.number),
-    [`24h_volume_${c}`]: types.maybe(types.number),
-    [`market_cap_${c}`]: types.maybe(types.number),
+    [`price_${c}`]: types.maybeNull(types.number),
+    [`24h_volume_${c}`]: types.maybeNull(types.number),
+    [`market_cap_${c}`]: types.maybeNull(types.number),
   }),
   {},
 )
 
 export default types
   .model('Ticker', {
-    id: types.identifier(types.string),
+    id: types.identifier,
     name: types.string,
     symbol: types.string,
     rank: types.number,
     last_updated: types.number,
 
-    available_supply: types.maybe(types.number),
-    total_supply: types.maybe(types.number),
+    available_supply: types.maybeNull(types.number),
+    total_supply: types.maybeNull(types.number),
 
-    percent_change_1h: types.maybe(types.number),
-    percent_change_24h: types.maybe(types.number),
-    percent_change_7d: types.maybe(types.number),
+    percent_change_1h: types.maybeNull(types.number),
+    percent_change_24h: types.maybeNull(types.number),
+    percent_change_7d: types.maybeNull(types.number),
     ...propTypes,
     holdings: types.optional(types.number, 0.0),
     history: types.optional(History, {}),

@@ -32,15 +32,15 @@ function getSymbol(symbol) {
 
 const HistoryPoint = types.model('HistoryPoint', {
   time: types.number,
-  close: types.maybe(types.number),
-  volumefrom: types.maybe(types.number),
+  close: types.maybeNull(types.number),
+  volumefrom: types.maybeNull(types.number),
 })
 
 export default types.model('History', {
   isFetching: types.optional(types.boolean, false),
   hasError: types.optional(types.boolean, false),
   data: types.optional(types.array(HistoryPoint), []),
-  lastUpdate: types.maybe(types.number),
+  lastUpdate: types.maybeNull(types.number),
 })
   .preProcessSnapshot(props => ({
     ...props,
