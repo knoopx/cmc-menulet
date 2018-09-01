@@ -1,16 +1,24 @@
 {
-  "presets": ["react"],
+  "presets": [
+    "@babel/preset-react"
+  ],
   "plugins": [
-    "transform-export-extensions",
-    "transform-decorators-legacy",
+    "@babel/plugin-proposal-export-default-from",
+    "@babel/plugin-proposal-export-namespace-from",
+    ["@babel/plugin-proposal-decorators", { "legacy": true }],
     "autobind-class-methods",
-    "transform-class-properties",
+    ["@babel/plugin-proposal-class-properties", { "loose": true }],
     "syntax-trailing-function-commas",
-    "transform-object-rest-spread",
-    ["transform-es2015-classes", { "loose": true }],
-    "transform-react-inline-elements",
-    "transform-react-constant-elements",
-    "closure-elimination",
+    "@babel/plugin-proposal-object-rest-spread",
+    [
+      "@babel/plugin-transform-classes",
+      {
+        "loose": true
+      }
+    ],
+    "@babel/plugin-transform-react-inline-elements",
+    "@babel/plugin-transform-react-constant-elements",
+    "closure-elimination"
   ],
   "env": {
     "development": {
@@ -19,7 +27,9 @@
       ]
     },
     "production": {
-      "plugins": ["transform-react-remove-prop-types"]
+      "plugins": [
+        "transform-react-remove-prop-types"
+      ]
     }
   }
 }

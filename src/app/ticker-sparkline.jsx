@@ -2,7 +2,7 @@ import React from 'react'
 import { gray } from 'open-color'
 import { observer } from 'mobx-react'
 import { withParentSize } from '@vx/responsive'
-import { MdWarning, MdCloudOff } from 'react-icons'
+import { MdWarning, MdCloudOff } from 'react-icons/md'
 
 import Spinner from './spinner'
 import Sparkline from './sparkline'
