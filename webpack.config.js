@@ -1,8 +1,8 @@
 const path = require('path')
 const webpack = require('webpack')
-const { productName, dependencies } = require('./package.json')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const { productName, dependencies } = require('./package.json')
 
 module.exports = {
   target: 'electron-renderer',
@@ -30,7 +30,7 @@ module.exports = {
   },
   resolve: {
     modules: [path.resolve(__dirname, './src'), 'node_modules'],
-    extensions: ['.js', '.jsx', '.json', '.css'],
+    extensions: ['.mjs', '.js', '.jsx', '.json', '.css'],
   },
   module: {
     rules: [
