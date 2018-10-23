@@ -9,7 +9,7 @@ import TickerSparkline from './ticker-sparkline'
 
 @observer
 export default class Ticker extends React.Component {
-  componentWillMount() {
+  componentDidMount() {
     this.props.ticker.setIsVisible(true)
   }
 
