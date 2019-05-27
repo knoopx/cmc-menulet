@@ -81,7 +81,7 @@
     "lodash": "^4.17.11",
     "mobx": "^5.5.2",
     "mobx-react": "^5.3.5",
-    "mobx-state-tree": "^3.7.0",
+    "mobx-state-tree": "^3.9.0",
     "mobx-utils": "^5.0.4",
     "numeral": "^2.0.6",
     "open-color": "^1.6.3",
