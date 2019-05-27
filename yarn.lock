@@ -362,10 +362,10 @@
   resolved "https://registry.yarnpkg.com/@vx/point/-/point-0.0.165.tgz#7ebde5da3d86954fe31a56f923f31550f0b4b867"
   integrity sha512-spoHilhjcWNgccrSzBUPw+PXV81tYxeyEWBkgr35aGVU4m7YT86Ywvfemwp7AVVGPn+XJHrhB0ujAhDoyqFPoA==
 
-"@vx/responsive@^0.0.179":
-  version "0.0.179"
-  resolved "https://registry.yarnpkg.com/@vx/responsive/-/responsive-0.0.179.tgz#0603ab2d0a055dc84d9d2d4f6da1c8434a56eab2"
-  integrity sha512-7lhpJ3c1rqdq5UhaRyUZhJAHv2x6mJjh5kYPr5yxvkXlQQh25HF0LXbcTJWPrh8KTGSNdV/vh329t1OalaH3pQ==
+"@vx/responsive@^0.0.189":
+  version "0.0.189"
+  resolved "https://registry.yarnpkg.com/@vx/responsive/-/responsive-0.0.189.tgz#64257fdf4570e58fe8a9f7a0d9b33febb7f80058"
+  integrity sha512-46phRmRMrcRvUgAwOCMkZdqSEyo8SdXdV3Fh1Zsdgrtzqs3Zg8xtd3UX9t0piXw0tJqeZ16JrOQAZbPxUp9jEw==
   dependencies:
     lodash "^4.17.10"
     prop-types "^15.6.1"

@@ -52,7 +52,7 @@
     "@babel/plugin-transform-react-inline-elements": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
     "@vx/group": "^0.0.170",
-    "@vx/responsive": "^0.0.179",
+    "@vx/responsive": "^0.0.189",
     "@vx/scale": "^0.0.179",
     "@vx/shape": "^0.0.179",
     "babel-eslint": "^10.0.1",
