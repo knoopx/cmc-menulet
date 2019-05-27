@@ -350,12 +350,20 @@
   dependencies:
     d3-shape "^1.0.6"
 
-"@vx/group@0.0.170", "@vx/group@^0.0.170":
+"@vx/group@0.0.170":
   version "0.0.170"
   resolved "https://registry.yarnpkg.com/@vx/group/-/group-0.0.170.tgz#8b30b3ea07c348fe22253812fe7cb6d4200d725d"
   integrity sha512-RnDdRoy0YI5hokk+YWXc8t39Kp51i4BdCpiwkDJU4YypGycTYnDFjicam6jigUmZ/6wyMirDf/aQboWviFLt2Q==
   dependencies:
     classnames "^2.2.5"
+
+"@vx/group@^0.0.189":
+  version "0.0.189"
+  resolved "https://registry.yarnpkg.com/@vx/group/-/group-0.0.189.tgz#030787b66ad5a48ec612ecc0e7df3fcfeb7b894c"
+  integrity sha512-qZCdAK/A/AjyycZT8cjFQDJb9l5eDkMYfYXdGDFLn60w1aW5skMkPZ7YyWqg1U6BLcibPWu7uFVjS1MoUCUHUg==
+  dependencies:
+    classnames "^2.2.5"
+    prop-types "^15.6.2"
 
 "@vx/point@0.0.165":
   version "0.0.165"
