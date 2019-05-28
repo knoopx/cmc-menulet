@@ -9,6 +9,22 @@
 }
 
 /* .cc:before { */
+
+.cc::before {
+  font-family: "cryptocoins";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  /* speak: none; only necessary if not using the private unicode range (firstGlyph option) */
+  text-decoration: none;
+  text-transform: none;
+}
+
+.cc.BTC::before {
+  content: "\E02E";
+}
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 
 /* Document
@@ -725,6 +741,10 @@ canvas {
 
 .text-2xl {
   font-size: 1.5rem;
+}
+
+.no-underline {
+  text-decoration: none;
 }
 
 .whitespace-no-wrap {
