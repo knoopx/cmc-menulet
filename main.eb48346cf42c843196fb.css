@@ -539,10 +539,6 @@ canvas {
   cursor: pointer;
 }
 
-.inline-block {
-  display: inline-block;
-}
-
 .flex {
   display: flex;
 }
