@@ -321,7 +321,8 @@ html {
 
 
 dl,
-dd {
+dd,
+p {
   margin: 0;
 }
 
