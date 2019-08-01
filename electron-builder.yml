@@ -1,0 +1,15 @@
+appId: net.knoopx.CoinMarketCap
+productName: CoinMarketCap
+directories:
+  output: release
+files:
+  - package.json
+  - build/**/*
+  - from: dist/electron
+    to: .
+mac:
+  target: dir
+  category: public.app-category.finance
+  identity: null
+  # publish:
+  #   - github
