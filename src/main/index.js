@@ -30,12 +30,12 @@ app.on('ready', () => {
     browserWindow: {
       width: 720,
       height: height * 0.8,
+      webPreferences: {
+        nodeIntegration: true,
+        webSecurity: false,
+      },
     },
     preloadWindow: true,
-    webPreferences: {
-      nodeIntegration: true,
-      webSecurity: false,
-    },
   })
 
   mb.on('ready', () => {
