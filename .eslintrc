@@ -1,22 +1,5 @@
 {
-  "parser": "babel-eslint",
-  "extends": ["airbnb-base", "airbnb-base/rules/strict", "airbnb/rules/react"],
-  "env": {
-    "browser": true,
-    "node": true
-  },
-  "rules": {
-    "no-console": "off",
-    "class-methods-use-this": "off",
-    "max-len": "off",
-    "no-underscore-dangle": "off",
-    "react/prefer-stateless-function": "off",
-    "react/sort-comp": "off",
-    "import/no-extraneous-dependencies": "off",
-    "import/extensions": ["warn", { "json": "never" }],
-    "semi": ["warn", "never"]
-  },
-  "plugins": ["import", "react"],
+  "extends": ["knoopx"],
   "settings": {
     "import/resolver": {
       "webpack": {
