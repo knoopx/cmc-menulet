@@ -2,7 +2,7 @@
   "name": "cmc-menulet",
   "description": "CoinMarketCap Menulet",
   "author": "Víctor Martínez",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "main": "main.js",
   "homepage": "https://knoopx.github.io/cmc-menulet/",
   "scripts": {
@@ -20,10 +20,33 @@
     "plugins": [
       "@semantic-release/commit-analyzer",
       "@semantic-release/release-notes-generator",
-      [ "@semantic-release/changelog", { "changelogFile": "CHANGELOG.md" } ],
-      [ "@semantic-release/npm", { "npmPublish": false } ],
-      [ "@semantic-release/git", { "assets": ["CHANGELOG.md", "package.json"] } ],
-      [ "@semantic-release/github", { "assets": "release/*.*" } ]
+      [
+        "@semantic-release/changelog",
+        {
+          "changelogFile": "CHANGELOG.md"
+        }
+      ],
+      [
+        "@semantic-release/npm",
+        {
+          "npmPublish": false
+        }
+      ],
+      [
+        "@semantic-release/git",
+        {
+          "assets": [
+            "CHANGELOG.md",
+            "package.json"
+          ]
+        }
+      ],
+      [
+        "@semantic-release/github",
+        {
+          "assets": "release/*.*"
+        }
+      ]
     ]
   },
   "dependencies": {},
