@@ -1,0 +1,22 @@
+name: "main"
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: build
+      run: |
+        sudo dpkg --add-architecture i386 && sudo apt-get update && sudo apt-get install -y wine32 wine-stable
+        yarn && yarn electron:release:all
+    - name: publish
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        sudo npm install -g semantic-release @semantic-release/changelog @semantic-release/git @semantic-release/npm
+        semantic-release

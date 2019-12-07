@@ -11,5 +11,3 @@ mac:
   target: dir
   category: public.app-category.finance
   identity: null
-  # publish:
-  #   - github

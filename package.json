@@ -11,9 +11,20 @@
     "electron:compile:renderer": "webpack-cli --mode production --config webpack.renderer.config.js",
     "electron:compile": "yarn electron:compile:main && yarn electron:compile:renderer",
     "electron:release": "yarn electron:compile && electron-builder",
+    "electron:release:all": "yarn electron:compile && electron-builder -mwl",
     "web:dev": "webpack-dev-server --hot --mode development --config webpack.web.config.js",
     "web:compile": "webpack-cli --mode production --config webpack.web.config.js",
     "web:publish": "yarn web:compile && gh-pages -d dist/web"
+  },
+  "release": {
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      [ "@semantic-release/changelog", { "changelogFile": "CHANGELOG.md" } ],
+      [ "@semantic-release/npm", { "npmPublish": false } ],
+      [ "@semantic-release/git", { "assets": ["CHANGELOG.md", "package.json"] } ],
+      [ "@semantic-release/github", { "assets": "release/*.*" } ]
+    ]
   },
   "dependencies": {},
   "devDependencies": {
