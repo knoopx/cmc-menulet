@@ -8,6 +8,6 @@ files:
   - from: dist/electron
     to: .
 mac:
-  target: dir
+  target: zip
   category: public.app-category.finance
   identity: null
