@@ -2,7 +2,7 @@
   "name": "cmc-menulet",
   "description": "CoinMarketCap Menulet",
   "author": "Víctor Martínez",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "main.js",
   "homepage": "https://knoopx.github.io/cmc-menulet/",
   "scripts": {
