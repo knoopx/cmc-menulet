@@ -1,9 +1,8 @@
-import React, { useState } from 'react'
-import Input from './input'
+import React, { useState } from "react"
 
-const NumericInput = ({
-  value: initialValue, onChange, ...props
-}) => {
+import Input from "./Input"
+
+const NumericInput = ({ value: initialValue, onChange, ...props }) => {
   const [value, setValue] = useState(initialValue)
 
   return (

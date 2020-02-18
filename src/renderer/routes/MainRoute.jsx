@@ -1,32 +1,33 @@
-import React from 'react'
-import { inject, observer } from 'mobx-react'
-import VirtualList from 'components/VirtualList'
-import Ticker from 'components/Ticker'
-import MainLayout from 'layouts/MainLayout'
-import classNames from 'classnames'
-import Input from 'components/input'
-import PeriodSwitcher from 'components/PeriodSwitcher'
+import React from "react"
+import { inject, observer } from "mobx-react"
+import classNames from "classnames"
+
+import VirtualList from "components/VirtualList"
+import Ticker from "components/Ticker"
+import MainLayout from "layouts/MainLayout"
+import Input from "components/Input"
+import PeriodSwitcher from "components/PeriodSwitcher"
 
 const MainRoute = ({ store }) => {
-  const renderItem = ticker => <Ticker key={ticker.id} ticker={ticker} />
+  const renderItem = (ticker) => <Ticker key={ticker.id} ticker={ticker} />
 
   return (
     <MainLayout>
-      <div className="flex flex-none px-2 py-2 border-b border-gray-7 justify-between">
+      <div className="flex flex-none justify-between px-2 py-2 border-b border-gray-7">
         <div
           className={classNames(
-            'cursor-pointer border px-2 py-1 rounded border-gray-7 mr-2 flex items-center',
+            "cursor-pointer border px-2 py-1 rounded border-gray-7 mr-2 flex items-center",
             {
-              'bg-gray-7': store.showOnlyHolding,
-              'bg-transparent': !store.showOnlyHolding,
+              "bg-gray-7": store.showOnlyHolding,
+              "bg-transparent": !store.showOnlyHolding,
             },
           )}
           onClick={store.toggleOnlyHolding}
         >
-            HOLD
+          HOLD
         </div>
         <Input
-          className="border px-2 py-1 rounded border-gray-7 mr-2 hidden sm:block"
+          className="hidden sm:block mr-2 px-2 py-1 border border-gray-7 rounded"
           type="search"
           value={store.query}
           placeholder="Filter..."
@@ -46,4 +47,4 @@ const MainRoute = ({ store }) => {
   )
 }
 
-export default inject('store')(observer(MainRoute))
+export default inject("store")(observer(MainRoute))
