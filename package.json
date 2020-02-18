@@ -44,7 +44,7 @@
       [
         "@semantic-release/github",
         {
-          "assets": "release/*.*"
+          "assets": "release/CoinMarketCap-*.*"
         }
       ]
     ]
