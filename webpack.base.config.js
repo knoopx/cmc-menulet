@@ -7,8 +7,15 @@ const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin"
 
 const { productName } = require("./package.json")
 
-module.exports = (name, entries = [], targets = [], overrides) =>
-  merge(
+module.exports = ({
+  name,
+  entries = [],
+  targets = [],
+  overrides,
+  isDevelopment,
+}) => {
+  console.log({ isDevelopment })
+  return merge(
     {
       entry: {
         [name]: [
@@ -38,8 +45,9 @@ module.exports = (name, entries = [], targets = [], overrides) =>
           },
         }),
         new ExtractCssChunks(),
-        new ReactRefreshWebpackPlugin({ disableRefreshCheck: true }),
-      ],
+        isDevelopment &&
+          new ReactRefreshWebpackPlugin({ disableRefreshCheck: true }),
+      ].filter(Boolean),
       module: {
         rules: [
           {
@@ -57,10 +65,10 @@ module.exports = (name, entries = [], targets = [], overrides) =>
                   ],
                   "@babel/preset-react",
                 ],
+                plugins: [isDevelopment && "react-refresh/babel"].filter(
+                  Boolean,
+                ),
                 env: {
-                  development: {
-                    plugins: ["react-refresh/babel"],
-                  },
                   production: {
                     plugins: ["transform-react-remove-prop-types"],
                   },
@@ -121,3 +129,4 @@ module.exports = (name, entries = [], targets = [], overrides) =>
     },
     overrides,
   )
+}
