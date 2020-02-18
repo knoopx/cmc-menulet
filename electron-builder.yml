@@ -1,4 +1,5 @@
 appId: net.knoopx.CoinMarketCap
+artifactName: "${productName}-${os}-${arch}.${ext}"
 productName: CoinMarketCap
 directories:
   output: release
