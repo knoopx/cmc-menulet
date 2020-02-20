@@ -26,7 +26,7 @@ module.exports = (env, argv) => {
           background_color: "#343a40",
           icons: [
             {
-              src: path.resolve(__dirname, "build/Icon.png"),
+              src: path.resolve(__dirname, "build/icon.png"),
               sizes: [96, 128, 192, 256, 384, 512],
             },
           ],
