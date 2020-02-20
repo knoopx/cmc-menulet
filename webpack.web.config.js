@@ -5,7 +5,6 @@ const { productName, description } = require("./package.json")
 const configure = require("./webpack.base.config")
 
 module.exports = (env, argv) => {
-  console.log(env, argv)
   return configure({
     name: "web",
     entries: ["core-js/stable", "regenerator-runtime/runtime"],

@@ -14,7 +14,6 @@ module.exports = ({
   overrides,
   isDevelopment,
 }) => {
-  console.log({ isDevelopment })
   return merge(
     {
       entry: {
