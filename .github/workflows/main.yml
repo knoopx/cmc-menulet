@@ -47,3 +47,4 @@ jobs:
         tag=$(git describe --tags --abbrev=0)
         for f in release/CoinMarketCap*; do [ -f "$f" ] && assets+=(-a "$f"); done
         hub release create $tag -m "Release $tag" "${assets[@]}"
+        yarn web:publish
