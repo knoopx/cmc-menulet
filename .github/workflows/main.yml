@@ -43,4 +43,7 @@ jobs:
         npx standard-version
         yarn electron:release:all
         git push --follow-tags origin master
-        yarn release
+        assets=()
+        tag=$(git describe --tags --abbrev=0)
+        for f in release/CoinMarketCap*; do [ -f "$f" ] && assets+=(-a "$f"); done
+        hub release create $tag -m "Release $tag" "${assets[@]}"

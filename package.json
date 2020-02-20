@@ -14,8 +14,7 @@
     "electron:release:all": "yarn electron:compile && electron-builder -mwl",
     "web:dev": "webpack-dev-server --hot --mode development --config webpack.web.config.js",
     "web:compile": "webpack-cli --mode production --config webpack.web.config.js",
-    "web:publish": "yarn web:compile && gh-pages -d dist/web",
-    "release": "hub release create \"v$npm_package_version\" -m \"v$npm_package_version\" -a release/CoinMarketCap-*.*"
+    "web:publish": "yarn web:compile && gh-pages -d dist/web"
   },
   "dependencies": {},
   "devDependencies": {
