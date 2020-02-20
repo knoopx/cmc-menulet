@@ -9,14 +9,30 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
+
+    - name: Get yarn cache directory path
+      id: yarn-cache-dir-path
+      run: echo "::set-output name=dir::$(yarn cache dir)"
+
+    - uses: actions/cache@v1
+      id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+      with:
+        path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+        key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-yarn-
+
     - name: build
-      run: |
-        sudo dpkg --add-architecture i386 && sudo apt-get update && sudo apt-get install -y wine32 wine-stable
-        yarn && yarn electron:release:all
-    - name: publish
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
-        sudo npm install -g semantic-release @semantic-release/changelog @semantic-release/git @semantic-release/npm
-        semantic-release
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        sudo snap install hub --classic
+        sudo dpkg --add-architecture i386 && sudo apt-get update && sudo apt-get install -y wine32 wine-stable
+        yarn
+        npx standard-version
+        yarn electron:release:all
+        git push --follow-tags origin master
+        yarn release
