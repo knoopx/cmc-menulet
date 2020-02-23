@@ -31,20 +31,32 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-electron-builder-
 
-    - name: build
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: prepare
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         sudo snap install hub --classic
         sudo dpkg --add-architecture i386 && sudo apt-get update && sudo apt-get install -y wine32 wine-stable
-        yarn
+
+    - name: build
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        yarn install
         npx standard-version
         yarn electron:release:all
         git push --follow-tags origin master
+
         assets=()
         tag=$(git describe --tags --abbrev=0)
         for f in release/CoinMarketCap*; do [ -f "$f" ] && assets+=(-a "$f"); done
         hub release create $tag -m "Release $tag" "${assets[@]}"
-        yarn web:publish
+
+        git fetch --no-tags --prune --depth=1 origin gh-pages
+        git worktree add dist/web gh-pages
+        rm -rf dist/web/**/*
+        yarn web:compile
+        cd dist/web
+        git add -f .
+        git commit -m "$tag"
+        git push

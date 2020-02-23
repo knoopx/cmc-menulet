@@ -1,7 +1,7 @@
 const path = require("path")
 const ExtractCssChunks = require("extract-css-chunks-webpack-plugin")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
-const whitelister = require("purgecss-whitelister")
+const purgecss = require("@fullhuman/postcss-purgecss")
 const merge = require("webpack-merge")
 const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin")
 
@@ -19,9 +19,9 @@ module.exports = ({
       entry: {
         [name]: [
           ...entries,
-          "cryptocoins-icons/webfont/cryptocoins.css",
           "./src/renderer/index.css",
           "./src/renderer/index.jsx",
+          "cryptocoins-icons/webfont/cryptocoins.css",
         ],
       },
       resolve: {
@@ -51,6 +51,7 @@ module.exports = ({
         rules: [
           {
             test: /\.jsx?$/,
+            include: [path.resolve(__dirname, "src/renderer")],
             use: {
               loader: "babel-loader",
               options: {
@@ -74,10 +75,10 @@ module.exports = ({
                 },
               },
             },
-            include: [path.resolve(__dirname, "src/renderer")],
           },
           {
             test: /\.css$/,
+            include: [path.resolve(__dirname, "src/renderer")],
             use: [
               ExtractCssChunks.loader,
               {
@@ -87,35 +88,37 @@ module.exports = ({
               {
                 loader: "postcss-loader",
                 options: {
-                  plugins: [require("tailwindcss")],
+                  plugins: [
+                    require("tailwindcss"),
+                    purgecss({
+                      whitelist: ["html", "body"],
+                      content: [
+                        path.join(
+                          __dirname,
+                          "./src/renderer/**/*.{js,jsx,css}",
+                        ),
+                      ],
+                      extractors: [
+                        {
+                          extractor: (content) =>
+                            content.match(/[A-Za-z0-9-_:/]+/g),
+                          extensions: ["js", "jsx"],
+                        },
+                      ],
+                    }),
+                  ],
                 },
               },
+            ],
+          },
+          {
+            test: /\.css$/,
+            include: [path.resolve(__dirname, "node_modules")],
+            use: [
+              ExtractCssChunks.loader,
               {
-                loader: "@fullhuman/purgecss-loader",
-                options: {
-                  whitelist: [
-                    "html",
-                    "body",
-                    ...whitelister(
-                      path.resolve(
-                        "node_modules/cryptocoins-icons/webfont/cryptocoins.css",
-                      ),
-                    ),
-                  ],
-                  content: [
-                    path.join(__dirname, "./src/renderer/**/*.{js,jsx,css}"),
-                  ],
-                  extractors: [
-                    {
-                      extractor: class {
-                        static extract(content) {
-                          return content.match(/[A-Za-z0-9-_:/]+/g)
-                        }
-                      },
-                      extensions: ["js", "jsx"],
-                    },
-                  ],
-                },
+                loader: "css-loader",
+                options: { modules: { mode: "global" } },
               },
             ],
           },
