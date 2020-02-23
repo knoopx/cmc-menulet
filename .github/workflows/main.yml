@@ -52,7 +52,7 @@ jobs:
         for f in release/CoinMarketCap*; do [ -f "$f" ] && assets+=(-a "$f"); done
         hub release create $tag -m "Release $tag" "${assets[@]}"
 
-        git fetch --no-tags --prune --depth=1 origin gh-pages
+        git fetch --no-tags --prune --depth=1 origin
         git worktree add dist/web gh-pages
         rm -rf dist/web/**/*
         yarn web:compile
